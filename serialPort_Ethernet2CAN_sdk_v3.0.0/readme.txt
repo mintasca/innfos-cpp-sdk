@@ -1,0 +1,3 @@
+1.如果使用cmake gui生成vs工程，点击generate生成选择生成工具时，请选择Visual Studio 14 2015 Win64生成工程文件;
+编译完成后需要将lib中的motorsContrll.dll(debug版本为motorsContrlld.dll)复制到vs生成的exe目录下，才能执行，或者将该dll所在的路径加入的Path的环境变量中也可以
+2.sdk运行需要vs2015的运行库，如果未安装，请先运行tools中的vcredist_x64.exe
