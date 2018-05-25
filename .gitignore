@@ -5,7 +5,6 @@
 *.a
 *.la
 *.lai
-*.dll
 *.dylib
 
 # Qt-es
