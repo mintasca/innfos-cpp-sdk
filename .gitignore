@@ -6,6 +6,10 @@
 *.la
 *.lai
 *.dylib
+*.deb
+*.ilk
+*.exp
+*.pdb
 
 # Qt-es
 object_script.*.Release
