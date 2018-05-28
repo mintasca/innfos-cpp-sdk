@@ -23,14 +23,14 @@ void tuneActuator()
     ActuatorController * pController = ActuatorController::getInstance();
     vector<uint8_t> idArray = pController->getActuatorIdArray();
     for (uint8_t id: idArray) {
-        //调整执行器速度环最小输出（-1,1）
-        pController->setActuatorAttribute(id,Actuator::VEL_OUTPUT_LIMITATION_MINIMUM,-0.5);
-        //调整执行器速度环最大输出（-1,1），最大值要大于最小值
-        pController->setActuatorAttribute(id,Actuator::VEL_OUTPUT_LIMITATION_MAXIMUM,0.5);
-        //调整执行器位置环最小输出（-1,1）
-        pController->setActuatorAttribute(id,Actuator::POS_OUTPUT_LIMITATION_MINIMUM,-0.5);
-        //调整执行器位置环最大输出（-1,1），最大值要大于最小值
-        pController->setActuatorAttribute(id,Actuator::POS_OUTPUT_LIMITATION_MAXIMUM,0.5);
+        //调整执行器速度环最小电流输出
+		pController->setMinOutputCurrent(id, -10);
+        //调整执行器速度环最大电流输出
+		pController->setMaxOutputCurrent(id, 10);
+        //调整执行器位置环最小速度输出
+		pController->setMinOutputVelocity(id, -2000);
+        //调整执行器位置环最大速度输出，最大值要大于最小值
+		pController->setMaxOutputVelocity(id, 2000);
         //调整执行器Mode_Profile_Pos的最大速度（RPM）
         pController->setActuatorAttribute(id,Actuator::PROFILE_POS_MAX_SPEED,1000);
     }

@@ -62,6 +62,7 @@ protected:
     Mediator();
 public:
     void handleIO();
+    void runOnce();
 private:
     static Mediator *m_pInstance;
 private:

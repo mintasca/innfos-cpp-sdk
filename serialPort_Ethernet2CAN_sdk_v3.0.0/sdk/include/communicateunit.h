@@ -6,6 +6,7 @@
 #include <list>
 #include <mutex>
 #include "CSignal.hpp"
+#include <thread>
 
 class CommunicateUnit
 {
@@ -25,7 +26,7 @@ public:
         return m_nUnitId;
     }
     void sendData(const std::vector<uint8_t> & sendData);
-    void stopCommunication();
+
     bool hasDataWaiting();
     bool isAvailable()const;
     void setConnectionStatus(uint8_t nStatus);
@@ -34,11 +35,12 @@ public:
 //public slots:
     virtual void progress()=0;
 protected:
-
+    void stopCommunication();
     std::map<uint8_t,std::vector <std::vector<uint8_t>>> m_dataMap;
     std::vector<std::vector<uint8_t>> m_dataVector;
     std::mutex m_qmMutex;
     bool m_bStop;
+    std::thread *m_pCommunicateThread;
     uint32_t m_nUnitId;
     uint8_t m_nConnectionStatus;
     std::list<uint8_t> m_relateIdList;//motors's ids whitch communicate via this unit

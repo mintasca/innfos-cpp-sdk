@@ -42,7 +42,6 @@ private:
     std::mutex m_responstMutex;
 protected:
     std::vector<CommunicateUnit *> m_lUnits;
-    std::vector<std::thread *> m_lThreads;
 };
 
 #endif // COMMUNICATION_H

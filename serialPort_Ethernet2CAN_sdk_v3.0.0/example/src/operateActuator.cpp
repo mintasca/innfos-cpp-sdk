@@ -97,8 +97,7 @@ void processSignal(int sign)
 
 int main(int argc, char *argv[])
 {
-    signal(SIGINT,processSignal);
-    thread inputThread(keyboardInput);
+
 
     if(argc != 2)
     {
@@ -117,6 +116,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+	signal(SIGINT, processSignal);
+	thread inputThread(keyboardInput);
     ActuatorController * pController = ActuatorController::getInstance();
 
 

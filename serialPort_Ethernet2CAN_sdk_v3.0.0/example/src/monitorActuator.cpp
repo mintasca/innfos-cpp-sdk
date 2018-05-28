@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
             if(pController->hasAvailableActuator())
             {
                 vector<uint8_t> idArray = pController->getActuatorIdArray();
+				cout << "Number of connected actuators:" << idArray.size() << endl;
                 for (uint8_t id: idArray) {
                     if(pController->getActuatorAttribute(id,Actuator::ACTUATOR_SWITCH)==Actuator::ACTUATOR_SWITCH_OFF)
                     {//如果执行器处于关机状态，启动执行器
@@ -113,8 +114,8 @@ int main(int argc, char *argv[])
     //执行控制器事件循环
     while (!bExit)
     {
-        //ActuatorController::processEvents();
-		this_thread::sleep_for(std::chrono::milliseconds(200));
+        ActuatorController::processEvents();
+		this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     //pController->closeAllActuators();
 
