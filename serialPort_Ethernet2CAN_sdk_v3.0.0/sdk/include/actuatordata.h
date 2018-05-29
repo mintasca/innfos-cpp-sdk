@@ -7,6 +7,7 @@
 #include "actuatordefine.h"
 #include "itimer.h"
 
+
 using namespace Actuator;
 //class  ITimer;
 
@@ -119,6 +120,7 @@ public:
     void clearError(uint8_t nDeviceId);
     void sendCmd(uint8_t nDeviceId,uint16_t cmdId);
     void sendCmd(uint8_t nDeviceId,uint16_t cmdId,uint8_t value);
+    void sendCmd(uint8_t nDeviceId,uint16_t cmdId,uint32_t value);
 private:
     MotorDataMgr();
 //signals:

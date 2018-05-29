@@ -257,6 +257,7 @@ namespace Actuator {
         D_SET_CURRENT_MAXSPEED=0x29,
         D_SET_SWITCH_MOTORS=0x2a,
         D_READ_MOTORS_SWITCH=0x2b,
+        D_SET_MOTOR_MAC=0x2c,
         D_SET_CURRENT_PID_MIN = 0x2e,//设置电流环的pid的上下限
         D_SET_CURRENT_PID_MAX=0x2f,
         D_SET_VELOCITY_PID_MIN=0x30,
