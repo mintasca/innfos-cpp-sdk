@@ -238,12 +238,12 @@ public:
      * @return sdk版本号字符串
      */
     string versionString()const;
+    //v3.0 add begin
     /**
      * @brief getMaxCurrent,获取执行器的最大允许电流，单位为A，该值仅与执行器型号有关，并且不可被修改
      * @param id 执行器id
      * @return 执行器的最大允许电流，单位为A
      */
-    //v3.0 add begin
     double getMaxCurrent(uint8_t id)const;
     /**
      * @brief getMaxVelocity,获取执行器的最大允许速度，单位为RPM，该值仅与执行器型号有关，并且不可被修改
