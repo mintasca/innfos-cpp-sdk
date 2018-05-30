@@ -15,13 +15,14 @@ class ACTUATORCONTROLLERSHARED_EXPORT ActuatorController
 {
 public:
     ~ActuatorController();
+protected:
     ActuatorController();
+public:
     /**
      * @brief initContorller 初始化控制器，使用控制器之前必须先初始化
-     * @param argc 参数个数
-     * @param argv 参数数组
+     * @param nCommunicationType 执行器通信方式，默认为以太网通信
      */
-    static void initController(int &argc, char **argv,int nCommunicationType=Actuator::Via_Ethernet);
+    static void initController(int nCommunicationType=Actuator::Via_Ethernet);
     /**
      * @brief getInstance 获取控制器对象
      * @return 控制器对象
