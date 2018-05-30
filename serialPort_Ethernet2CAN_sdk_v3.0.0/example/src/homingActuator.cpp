@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 
     signal(SIGINT,processSignal);
-    ActuatorController::initController(argc,argv);
+    //ActuatorController::initController(argc,argv);
     ActuatorController * pController = ActuatorController::getInstance();
 
     int nLaunchedActuatorCnt = 0;
