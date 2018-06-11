@@ -12,6 +12,7 @@ class EthernetAutoRecognize : public AbstractAutoRecognize
 {
 public:
     explicit EthernetAutoRecognize();
+    ~EthernetAutoRecognize();
     void startRecognize()override;
     void waitTimeout()override;
 protected:
