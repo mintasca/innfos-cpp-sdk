@@ -3,8 +3,6 @@
 #include "v8stdint.h"
 #include <vector>
 
-
-
 class IData
 {
 public:

@@ -310,6 +310,7 @@ public:
      * @param nMode 指定的激活模式
      */
     void activeActuatorMode(uint8_t id, const Actuator::ActuatorMode nMode);
+    double getActuatorAttributeWithACK(uint8_t id,Actuator::ActuatorAttribute attrId,bool * bSuccess = nullptr);
     //v3.0 add end
     void switchCalibrationVel(uint8_t nDeviceId,uint8_t nValue);
     void switchCalibration(uint8_t nDeviceId,uint8_t nValue);

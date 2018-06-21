@@ -15,6 +15,12 @@ class ActuatorData
 {
 
 public:
+    enum DATA_STATUS{
+        DATA_WAIT,
+        DATA_FAILED,
+        DATA_NORMAL,
+        DATA_NONE,
+    };
     explicit ActuatorData(const uint8_t nDeviceId,const uint32_t nDeviceMac);
     uint8_t deviceId() const;
     int8_t requestDeviceId()const;
@@ -23,6 +29,9 @@ public:
     void requestAllValue();
     double getValue(Actuator::ActuatorAttribute nDataId)const;
     double getUserRequestValue(Actuator::ActuatorAttribute nDataId)const;
+    void regainData(Actuator::ActuatorAttribute nDataId);
+    int getDataStatus(Actuator::ActuatorAttribute nDataId)const;
+    void requestFailed(Actuator::ActuatorAttribute nDataId);
     void setValueByUser(Actuator::ActuatorAttribute nDataId,double value,bool bSendProxy=true);//set value by user, will send proxy or not
     void responseHeart(bool bSuccess);
     bool isOnline()const;
@@ -68,6 +77,7 @@ private:
 private:
     double m_motorData[Actuator::DATA_CNT];
     double m_userRequestData[Actuator::DATA_CNT];
+    int m_dataStatus[Actuator::DATA_CNT];
     int m_nHeartFailCnt;//
     ITimer * m_pHeartTimer;
     ITimer * m_pValueTimer;
@@ -89,6 +99,7 @@ public:
     double getMotorDataAttrValueAsDouble(const uint8_t nDeviceId,const Actuator::ActuatorAttribute attrId)const;
     int32_t getMotorDataAttrValueAsInt(const uint8_t nDeviceId,const Actuator::ActuatorAttribute attrId)const;
     void setMotorDataAttrByUser(const uint8_t nDeviceId,const Actuator::ActuatorAttribute attrId,double value,bool bSend=true);
+
     void setMotorDataAttrByProxy(const uint8_t nDeviceId,int proxyId,double value);//data from proxy
     void setMotorDataAttrInBatch(const std::list<uint8_t> idList,const Actuator::ActuatorAttribute attrId,double value,bool bSend=true);
     void AddMotorsData(std::map<uint8_t,uint32_t> dataMap);
@@ -99,6 +110,7 @@ public:
     void activeMotorModeInBatch(const std::list<uint8_t> idList,const Actuator::ActuatorMode mode);
     void regainAllData(const uint8_t nDeviceId);
     void regainData(const uint8_t nDeviceId,Actuator::ActuatorAttribute attrId);
+
     void responseHeart(const uint8_t nDeviceId,bool bSuccessfully);
 
     void switchAutoRequestActual(const uint8_t nDeviceId,bool bStart);
@@ -118,6 +130,10 @@ public:
     void requestFailed(const uint8_t nDeviceId,const uint8_t nProxyId);
     void reconnect(uint8_t nDeviceId);
     void clearError(uint8_t nDeviceId);
+
+    bool setMotorDataWithACK(const uint8_t nDeviceId,const Actuator::ActuatorAttribute attrId,double value,bool bSend=true);
+    double regainAttrWithACK(const uint8_t nDeviceId,Actuator::ActuatorAttribute attrId,bool *bSuccess=nullptr);
+
     void sendCmd(uint8_t nDeviceId,uint16_t cmdId);
     void sendCmd(uint8_t nDeviceId,uint16_t cmdId,uint8_t value);
     void sendCmd(uint8_t nDeviceId,uint16_t cmdId,uint32_t value);
@@ -147,6 +163,7 @@ private:
     bool checkIdUnique(std::map<uint8_t,uint32_t> dataMap)const;//check all motors's id si unique or not, if not warning and exit the app
     void handleUnuiqueError(std::map<uint8_t,uint32_t> dataMap);
     double getMotorDataAttrValue(const uint8_t nDeviceId,const Actuator::ActuatorAttribute attrId)const;
+    bool waitForACK(const ActuatorData * pData,const ActuatorAttribute attrId);
 private:
     std::list<ActuatorData *> m_allMotorDatas;
     static MotorDataMgr * m_pMgr;

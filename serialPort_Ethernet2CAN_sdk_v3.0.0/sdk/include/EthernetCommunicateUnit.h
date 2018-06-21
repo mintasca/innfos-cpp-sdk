@@ -9,6 +9,7 @@ class EthernetCommunicateUnit : public CommunicateUnit
     
 public:
     EthernetCommunicateUnit(uint32_t unitId,const std::string unitAddr,uint32_t port);
+    ~EthernetCommunicateUnit();
     std::string getCommunicationUnitName()override{return m_sUnitAddr;}
     void progress();
     void receiveHandler(const asio::error_code & ec,std::size_t bytes);

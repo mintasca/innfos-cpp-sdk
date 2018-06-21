@@ -10,6 +10,7 @@ public:
     virtual ~AbstractAutoRecognize();
     virtual void startRecognize()=0;
     virtual void waitTimeout()=0;
+    void clearInfo();
 public:
     void addMototInfo(uint8_t nDeviceId,uint32_t nDeviceMac);
     std::map<uint8_t,uint32_t> getMotorsInfo()const{return m_motorsInfo;}
