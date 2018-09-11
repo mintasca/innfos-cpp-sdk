@@ -44,9 +44,9 @@ int main(int argc, char *argv[])
 
     //初始化控制器
     if(strcmp(argv[1],"-s")==0)
-        ActuatorController::initController(argc,argv,Actuator::Via_Serialport);
+        ActuatorController::initController(Actuator::Via_Serialport);
     else if(strcmp(argv[1],"-e")==0)
-        ActuatorController::initController(argc,argv);
+        ActuatorController::initController();
     else
     {
         std::cerr << argv[1] <<"Usage: homingActuator <communicationType>\ncommunicationType:-s communicate via serialport or -e communicate via ethernet\n";
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 
     signal(SIGINT,processSignal);
-    ActuatorController::initController(argc,argv);
+//    ActuatorController::initController();
     ActuatorController * pController = ActuatorController::getInstance();
 
     int nLaunchedActuatorCnt = 0;
