@@ -9,7 +9,7 @@ class SerialCommunicateUnit : public CommunicateUnit
 public:
     SerialCommunicateUnit(uint32_t unitId,const std::string portName,uint32_t bauRate);
     ~SerialCommunicateUnit();
-    std::string getCommunicationUnitName()override{return m_sPortName;}
+    std::string getCommunicationUnitName()const override{return m_sPortName;}
 //public slots:
     virtual void progress();
     void receiveHandler(const asio::error_code & ec,std::size_t bytes);

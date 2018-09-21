@@ -33,21 +33,23 @@ public:
     void autoRecognize();//auto recognize motor
     void onCanConnected(uint32_t nCommunicationUnitId);
     void SendRequest(const std::vector<uint8_t> & buf);
-    void Handshake(uint32_t nDeviceId,bool bSuccess);
-    void SetCurParam(const int nDeviceID,const double value, const int nProxyId);//set motor param values
-    void SetSucceed(const uint8_t nDeviceId, const int nProxyId);//
-    void SetFailed(const uint8_t nDeviceId, const int nProxyId);//设置下位机参数fail
+    void SendRequest(uint64_t longId,const std::vector<uint8_t> & buf);
+    void SendRequest(const std::string& target,const std::vector<uint8_t> & buf);
+    void Handshake(uint64_t longId,bool bSuccess);
+    void SetCurParam(const uint64_t longId,const double value, const int nProxyId);//set motor param values
+    void SetSucceed(const uint64_t longId, const int nProxyId);//
+    void SetFailed(const uint64_t longId, const int nProxyId);//设置下位机参数fail
     //void NullChartPointer();
 
     void reciveMotorInfo(uint32_t communicateUnitId,const uint32_t nDeviceMac, const uint8_t nDeviceId);
     void receiveNoDataProxy(const int nDeviceID);
     void checkServosStatus();//check servos are on or off
-    void recognizeFinished(std::map<uint8_t,uint32_t> motorsInfo);
+    void recognizeFinished(std::multimap<uint32_t,std::pair<uint8_t,uint32_t>> motorsInfo);
     void chartVauleChange(const int nChannelId,double values);//only use by chart
     asio::io_context * ioContext();
 #ifdef IMU_ENABLE
-    void receiveQuaternion(uint8_t imuId, double w,double x,double y,double z);
-    void requestQuaternion(uint8_t nCmdId);
+    void receiveQuaternion(uint64_t imuId, double w,double x,double y,double z);
+    void requestQuaternion(uint8_t nCmdId,uint64_t imuId=0);
 #endif
     std::string versionString()const;
     int addCommunicationUnit(std::string unitStr,uint32_t unitNumber);
@@ -55,9 +57,13 @@ public:
     void initCommunication(int nType);
 //public slots:
     void response(uint32_t nUnitId,const std::vector<uint8_t> buf);
-    void reconnectDevice(uint8_t nDeviceId);
-    void errorOccur(uint8_t nDeviceId,uint16_t errorId, std::string errorStr);
-    void motorAttrChanged(uint8_t nDeviceId,uint8_t nAttrId,double value);
+    void reconnectDevice(uint64_t longId);
+    void errorOccur(uint64_t longId,uint16_t errorId, std::string errorStr);
+    void motorAttrChanged(uint64_t longId,uint8_t nAttrId,double value);
+    static uint64_t toLongId(uint32_t communicationId, uint8_t byteId);
+    static uint32_t toCommunicationId(uint64_t longId);
+    static uint8_t toDeviceId(uint64_t longId);
+    static std::string toString(uint64_t longId);
 protected:
     Mediator();
 public:
@@ -80,13 +86,13 @@ private:
     };
 public:
     CSignal<> m_sRecognizeFinished;
-    CSignal<uint8_t,uint8_t,double> m_sRequestBack;
-    CSignal<uint8_t,uint16_t,std::string> m_sError;
-    CSignal<uint8_t,uint8_t,double> m_sMotorAttrChanged;
+    CSignal<uint64_t,uint8_t,double> m_sRequestBack;
+    CSignal<uint64_t,uint16_t,std::string> m_sError;
+    CSignal<uint64_t,uint8_t,double> m_sMotorAttrChanged;
     CSignal<> m_sNewChartStart;
     CSignal<uint8_t,double> m_sChartValueChange;
 #ifdef IMU_ENABLE
-    CSignal<uint8_t,double,double,double,double> m_sQuaternion;
+    CSignal<uint64_t,double,double,double,double> m_sQuaternion;
 #endif
 private:
     VersionNumber * m_pVersionMgr;

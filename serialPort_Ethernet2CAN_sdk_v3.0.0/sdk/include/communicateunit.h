@@ -31,13 +31,14 @@ public:
     bool isAvailable()const;
     void setConnectionStatus(uint8_t nStatus);
     uint8_t getConnectionStatus()const;
-    virtual std::string getCommunicationUnitName()=0;
+    virtual std::string getCommunicationUnitName()const=0;
 //public slots:
     virtual void progress()=0;
 protected:
     void stopCommunication();
     std::map<uint8_t,std::vector <std::vector<uint8_t>>> m_dataMap;
     std::vector<std::vector<uint8_t>> m_dataVector;
+    std::vector<std::vector<uint8_t>> m_dataVectorFast;//datas in this vector will be send very fast
     std::mutex m_qmMutex;
     bool m_bStop;
     std::thread *m_pCommunicateThread;

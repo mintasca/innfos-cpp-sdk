@@ -22,6 +22,8 @@ public:
     virtual ~ Communication();
     virtual int addCommunication(const std::string &str,const uint32_t num)=0;
     void sendData(uint8_t nDeviceId,const std::vector<uint8_t> & data);
+    void sendDataWithLongId(uint64_t longId,const std::vector<uint8_t> & data);
+    void sendData(const std::string& unitName,const std::vector<uint8_t> & data);
     bool hasDataWaitToSend();
     void stop();
     void recordRemainCmds();
@@ -31,6 +33,7 @@ public:
     void setUnitConnectionStatus(uint32_t nUnitId,uint8_t nStatus);
 //public slots:
     void unitFinished(uint8_t unitId);
+    std::string getCommunicateUnitName(uint32_t unitId)const;
 protected:
 
 //signals:

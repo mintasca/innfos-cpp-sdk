@@ -7,6 +7,7 @@
 #include <vector>
 #include <mutex>
 #include "actuatordefine.h"
+#include "mediator.h"
 
 class QFile;
 class QTextStream;
@@ -20,6 +21,8 @@ public:
     IData * m_pData;
 //public slots:
     void Send();
+    void Send(const std::string & target);
+    void Send(uint64_t longId);
 public:
     InnfosProxy(const int nId,const uint8_t nDeviceId);
     virtual ~InnfosProxy();
@@ -27,6 +30,8 @@ public:
     const int GetIdx()const { return m_nId; }
     static void SendProxy(const uint8_t nDeviceId,const int nIdx);
     static void SendProxy(const uint8_t nDeviceId,const uint32_t nDeviceMac,const int nIdx,const uint8_t newDeviceId);
+    static void SendProxyWithLongId(const uint64_t longId,const int nIdx);
+    static void SendProxyWithLongId(const uint64_t longId,const uint32_t nDeviceMac,const int nIdx,const uint8_t newDeviceId);
     template <class T>
     static void SendProxy(const uint8_t nDeviceId,const int nIdx,T data){
         InnfosProxy proxy(nIdx,nDeviceId);
@@ -36,11 +41,25 @@ public:
         proxy.m_pData->AddProxyEnd();
         proxy.Send();
     }
-    static void SendProxyScale(const uint8_t nDeviceId,const int nIdx,double data,int nScale=(1<<24)){//actural vaue will be scale 1<<24
-        int nScaleValue = data*nScale;
-        SendProxy(nDeviceId,nIdx,nScaleValue);
+    template <class T>
+    static void SendProxyWithLongId(const uint64_t longId,const int nIdx,T data){
+        InnfosProxy proxy(nIdx,Mediator::toDeviceId(longId));
+        proxy.m_pData->WriteShort(sizeof(T));
+        proxy.m_pData->WriteData(data);
+        proxy.m_pData->AddCRCCode(sizeof(T));
+        proxy.m_pData->AddProxyEnd();
+        proxy.Send(longId);
     }
-    static void SendQrealProxy(const uint8_t nDeviceId,const int nIdx,double data);//data is double,will be scale
+    template <class T>
+    static void SendProxy(const std::string & target,const int nIdx,T data){
+        InnfosProxy proxy(nIdx,0);
+        proxy.m_pData->WriteShort(sizeof(T));
+        proxy.m_pData->WriteData(data);
+        proxy.m_pData->AddCRCCode(sizeof(T));
+        proxy.m_pData->AddProxyEnd();
+        proxy.Send(target);
+    }
+
     static std::vector<uint8_t> getProxyContent(const uint8_t nDeviceId,const int nProxyIdx);
 protected:
 private:

@@ -3,15 +3,18 @@
 
 namespace Actuator {
 
-//连接状态，用于执行器和CAN的连接状态判断：
+///连接状态，用于执行器和CAN的连接状态判断：
     enum ConnectStatus
-    {//connect status
+    {
+        ///无连接
         NO_CONNECT,
+        ///CAN通信已连接
         CAN_CONNECTED=0x02,
+        ///执行器已连接
         ACTUATOR_CONNECTED=0x04,
     };
 
-    //通道ID,用于标识执行器图表数据的通道索引：
+    ///通道ID,用于标识执行器图表数据的通道索引：
     enum Channel_ID
     {
         channel_1=0,
@@ -21,193 +24,292 @@ namespace Actuator {
         channel_cnt
     };
 
-//错误类型定义，定义了执行器内部和连接等错误代码：
+///错误类型定义，定义了执行器内部和连接等错误代码：
     enum ErrorsDefine
     {
         ERR_NONE = 0,
-    //执行器过压错误
+    ///执行器过压错误
         ERR_ACTUATOR_OVERVOLTAGE=0x01,
-    //执行器欠压错误
+    ///执行器欠压错误
         ERR_ACTUATOR_UNDERVOLTAGE=0x02,
-    //执行器堵转错误
+    ///执行器堵转错误
         ERR_ACTUATOR_LOCKED_ROTOR=0x04,
-    //执行器过温错误
+    ///执行器过温错误
         ERR_ACTUATOR_OVERHEATING=0x08,
-    //执行器读写错误
+    ///执行器读写错误
         ERR_ACTUATOR_READ_OR_WIRTE=0x10,
-    //执行器多圈计数错误
+    ///执行器多圈计数错误
         ERR_ACTUATOR_MULTI_TURN=0x20,
-    //执行器逆变器温度器错误
+    ///执行器逆变器温度器错误
         ERR_INVERTOR_TEMPERATURE_SENSOR=0x40,
-    //执行器CAN通信错误
+    ///执行器CAN通信错误
         ERR_CAN_COMMUNICATION=0x80,
-    //执行器温度传感器错误
+    ///执行器温度传感器错误
         ERR_ACTUATOR_TEMPERATURE_SENSOR=0x100,
-    //执行器DRV保护
+    ///执行器DRV保护
         ERR_DRV_PROTECTION=0x400,
-    //执行器ID不唯一错误
+    ///执行器ID不唯一错误
         ERR_ID_UNUNIQUE=0x800,
-    //执行器未连接错误
+    ///执行器未连接错误
         ERR_ACTUATOR_DISCONNECTION=0x801,
-    //CAN通信转换板未连接错误
+    ///CAN通信转换板未连接错误
         ERR_CAN_DISCONNECTION=0x802,
-    //无可用ip地址错误
+    ///无可用ip地址错误
         ERR_IP_ADDRESS_NOT_FOUND=0x803,
-    //执行器非正常关机错误
+    ///执行器非正常关机错误
         ERR_ABNORMAL_SHUTDOWN=0x804,
-    //执行器关机时参数保存错误
+    ///执行器关机时参数保存错误
         ERR_SHUTDOWN_SAVING=0x805,
+        ///通信端口已绑定
+        ERR_IP_HAS_BIND=0x806,
         ERR_UNKOWN=0xffff
     };
 
-//在线状态，用于标识执行器是否处于连接状态：
+///在线状态，用于标识执行器是否处于连接状态：
     enum OnlineStatus
     {
+        ///在线
         Status_Online=0x00,
+        ///不在线
         Status_Offline=0x01,
     };
 
-//开关状态，标识执行器的开关机状态：
+///开关状态，标识执行器的开关机状态：
     enum SwitchStatus
     {
+        ///执行器开启
         ACTUATOR_SWITCH_OFF=0,
+        ///执行器关闭
         ACTUATOR_SWITCH_ON=1,
     };
 
-//图表开关，用于标识执行器图表功能的开启或关闭：
+///图表开关，用于标识执行器图表功能的开启或关闭：
     enum ChartSwitchStatus
     {
+        ///图表数据功能开启
         CHART_SWITCH_OFF=0,
+        ///图表数据功能关闭
         CHART_SWITCH_ON=1,
     };
 
-//电流环图表索引，用于标识电流图表是IQ值还是ID值
+///电流环图表索引，用于标识电流图表是IQ值还是ID值
     enum CurrnetChart
     {
         IQ_CHART=0,
         ID_CHART=1,
     };
-//归零模式，分为手动和自动两种
+///归零模式，分为手动和自动两种
     enum HomingOperationMode
     {
+        ///自动模式
         Homing_Auto=0,
+        ///手动模式(推荐)
         Homing_Manual,
     };
-
-//通信方式，可通过以太网或者串口两种方式与执行器通信，初始化执行器控制器时候要指定方式，默认为以太网通信：
+///通信方式，可通过以太网或者串口两种方式与执行器通信，初始化执行器控制器时候要指定方式，默认为以太网通信：
     enum CommunicationType
     {
+        ///以太网通信
         Via_Ethernet,
+        ///串口通信
         Via_Serialport,
     };
 
 
-    //操作标识，标识操作完成，可用于判断执行器控制器的指令执行状态：
+    ///操作标识，标识操作完成，可用于判断执行器控制器的指令执行状态：
     enum OperationFlags
     {
-    //自动识别完成
+    ///自动识别完成
         Recognize_Finished,
-    //执行器启动完成（如果连接的是多个执行器，会触发多次启动完成信号）
+    ///执行器启动完成（如果连接的是多个执行器，会触发多次启动完成信号）
         Launch_Finished,
-    //执行器关闭完成（如果连接的是多个执行器，会触发多次关闭完成信号）
+    ///执行器关闭完成（如果连接的是多个执行器，会触发多次关闭完成信号）
         Close_Finished,
-    //执行器参数保存完成（如果连接的是多个执行器，会触发多次参数保存完成信号）
+    ///执行器参数保存完成（如果连接的是多个执行器，会触发多次参数保存完成信号）
         Save_Params_Finished,
-        //执行器参数保存失败
+        ///执行器参数保存失败
         Save_Params_Failed,
-    //暂未实现
+    ///暂未实现
         Attribute_Change_Finished,
     };
 
-//执行器模式，标识当前执行器的模式：
+///执行器模式，标识当前执行器的模式：
     enum ActuatorMode
     {
         Mode_None,
-        Mode_Cur,//电流模式
-        Mode_Vel,//速度模式
-        Mode_Pos,//位置模式
-        Mode_Teaching,//暂未实现
-        Mode_Profile_Pos=6,//profile位置模式，比较于位置模式，该模式有加速减速过程
-        Mode_Profile_Vel, //profile速度模式，比较于速度模式，该模式有加速减速过程
-
-        Mode_Homing,//归零模式
+        ///电流模式
+        Mode_Cur,
+        ///速度模式
+        Mode_Vel,
+        ///位置模式
+        Mode_Pos,
+        ///暂未实现
+        Mode_Teaching,
+        ///profile位置模式，比较于位置模式，该模式有加速减速过程
+        Mode_Profile_Pos=6,
+        ///profile速度模式，比较于速度模式，该模式有加速减速过程
+        Mode_Profile_Vel,
+        ///归零模式
+        Mode_Homing,
     };
 
-//执行器属性，标识了执行器所有相关属性：
+///执行器属性，标识了执行器所有相关属性：
     enum ActuatorAttribute
     {
-        CUR_IQ_SETTING,//电流IQ值
-        CUR_PROPORTIONAL,//电流比例
-        CUR_INTEGRAL,//电流积分
-        CUR_ID_SETTING,//电流ID值
-        CUR_MINIMUM,//预留
-        CUR_MAXIMUM,//预留
-        CUR_NOMINAL,//预留
-        CUR_OUTPUT,//预留
-        CUR_MAXSPEED,//电流环最大速度
-        ACTUAL_CURRENT,//当前电流值
-        VEL_SETTING,//速度设置
-        VEL_PROPORTIONAL,//速度比例
-        VEL_INTEGRAL,//速度积分
-        VEL_OUTPUT_LIMITATION_MINIMUM,//速度环输出最小电流比例
-        VEL_OUTPUT_LIMITATION_MAXIMUM,//速度环输出最大电流比例
-        ACTUAL_VELOCITY,//速度值
-        POS_SETTING,//位置设置
-        POS_PROPORTIONAL,//位置比例
-        POS_INTEGRAL,//位置积分
-        POS_DIFFERENTIAL,//位置微分
-        POS_OUTPUT_LIMITATION_MINIMUM,//位置环输出最小速度比例
-        POS_OUTPUT_LIMITATION_MAXIMUM,//位置环输出最大速度比例
-        POS_LIMITATION_MINIMUM,//最小位置限制
-        POS_LIMITATION_MAXIMUM,//最大位置限制
-        HOMING_POSITION,//归零位置
-        ACTUAL_POSITION,//当前位置
-        PROFILE_POS_MAX_SPEED,//profile position模式最大速度
-        PROFILE_POS_ACC,//profile position模式加速度
-        PROFILE_POS_DEC,//profile position模式减速速度
-        PROFILE_VEL_MAX_SPEED,//profile velocity模式最大速度
-        PROFILE_VEL_ACC,//profile velocity模式加速度
-        PROFILE_VEL_DEC,//profile velocity模式减速速度
-        CHART_FREQUENCY,//图像频率
-        CHART_THRESHOLD,//图像阈值
-        CHART_SWITCH,//图像开关
-        POS_OFFSET,//位置偏移
-        VOLTAGE,//电压
-        POS_LIMITATION_SWITCH,//开启或关闭位置限制
-        HOMING_CUR_MAXIMUM,//归零最大电流
-        HOMING_CUR_MINIMUM,//归零最小小电流
-        CURRENT_SCALE,//物理最大电流值
-        VELOCITY_SCALE,//速度最大电流值
-        FILTER_C_STATUS,//电流环滤波是否开启
-        FILTER_C_VALUE,//电流环滤波值
-        FILTER_V_STATUS,//速度环滤波是否开启
-        FILTER_V_VALUE,//速度环滤波值
-        FILTER_P_STATUS,//位置环滤波是否开启
-        FILTER_P_VALUE,//位置环滤波值
-        INERTIA,//惯量
-        LOCK_ENERGY,//堵转保护能量
-        ACTUATOR_TEMPERATURE,//执行器温度
-        INVERTER_TEMPERATURE,//逆变器温度
-        ACTUATOR_PROTECT_TEMPERATURE,//执行器保护温度
-        ACTUATOR_RECOVERY_TEMPERATURE,//执行器恢复温度
-        INVERTER_PROTECT_TEMPERATURE,//逆变器保护温度
-        INVERTER_RECOVERY_TEMPERATURE,//逆变器恢复温度
-        CALIBRATION_SWITCH,//预留
-        CALIBRATION_ANGLE,//预留
-        ACTUATOR_SWITCH,//执行器开关机
-        FIRMWARE_VERSION,//执行器固件版本
-        ONLINE_STATUS,//执行器是否在线
-        DEVICE_ID,//执行器Id
-        SN_ID,//执行器SN号
-        MODE_ID,//执行器当前模式
-        ERROR_ID,//错误代码
-        CUMULATIVE_TIME,//累计运行时间
+        ///电流IQ值
+        CUR_IQ_SETTING,
+        ///电流比例
+        CUR_PROPORTIONAL,
+        ///电流积分
+        CUR_INTEGRAL,
+        ///电流ID值
+        CUR_ID_SETTING,
+        ///预留
+        CUR_MINIMUM,
+        ///预留
+        CUR_MAXIMUM,
+        ///预留
+        CUR_NOMINAL,
+        ///预留
+        CUR_OUTPUT,
+        ///电流环最大速度
+        CUR_MAXSPEED,
+        ///当前电流值
+        ACTUAL_CURRENT,
+        ///速度设置
+        VEL_SETTING,
+        ///速度比例
+        VEL_PROPORTIONAL,
+        ///速度积分
+        VEL_INTEGRAL,
+        ///速度环输出最小电流比例
+        VEL_OUTPUT_LIMITATION_MINIMUM,
+        ///速度环输出最大电流比例
+        VEL_OUTPUT_LIMITATION_MAXIMUM,
+        ///速度值
+        ACTUAL_VELOCITY,
+        ///位置设置
+        POS_SETTING,
+        ///位置比例
+        POS_PROPORTIONAL,
+        ///位置积分
+        POS_INTEGRAL,
+        ///位置微分
+        POS_DIFFERENTIAL,
+        ///位置环输出最小速度比例
+        POS_OUTPUT_LIMITATION_MINIMUM,
+        ///位置环输出最大速度比例
+        POS_OUTPUT_LIMITATION_MAXIMUM,
+        ///最小位置限制
+        POS_LIMITATION_MINIMUM,
+        ///最大位置限制
+        POS_LIMITATION_MAXIMUM,
+        ///归零位置
+        HOMING_POSITION,
+        ///当前位置
+        ACTUAL_POSITION,
+        ///profile position模式最大速度
+        PROFILE_POS_MAX_SPEED,
+        ///profile position模式加速度
+        PROFILE_POS_ACC,
+        ///profile position模式减速速度
+        PROFILE_POS_DEC,
+        ///profile velocity模式最大速度
+        PROFILE_VEL_MAX_SPEED,
+        ///profile velocity模式加速度
+        PROFILE_VEL_ACC,
+        ///profile velocity模式减速速度
+        PROFILE_VEL_DEC,
+        ///图像频率
+        CHART_FREQUENCY,
+        ///图像阈值
+        CHART_THRESHOLD,
+        ///图像开关
+        CHART_SWITCH,
+        ///位置偏移
+        POS_OFFSET,
+        ///电压
+        VOLTAGE,
+        ///开启或关闭位置限制
+        POS_LIMITATION_SWITCH,
+        ///归零最大电流
+        HOMING_CUR_MAXIMUM,
+        ///归零最小小电流
+        HOMING_CUR_MINIMUM,
+        ///物理最大电流值
+        CURRENT_SCALE,
+        ///速度最大电流值
+        VELOCITY_SCALE,
+        ///电流环滤波是否开启
+        FILTER_C_STATUS,
+        ///电流环滤波值
+        FILTER_C_VALUE,
+        ///速度环滤波是否开启
+        FILTER_V_STATUS,
+        ///速度环滤波值
+        FILTER_V_VALUE,
+        ///位置环滤波是否开启
+        FILTER_P_STATUS,
+        ///位置环滤波值
+        FILTER_P_VALUE,
+        ///惯量
+        INERTIA,
+        ///堵转保护能量
+        LOCK_ENERGY,
+        ///执行器温度
+        ACTUATOR_TEMPERATURE,
+        ///逆变器温度
+        INVERTER_TEMPERATURE,
+        ///执行器保护温度
+        ACTUATOR_PROTECT_TEMPERATURE,
+        ///执行器恢复温度
+        ACTUATOR_RECOVERY_TEMPERATURE,
+        ///逆变器保护温度
+        INVERTER_PROTECT_TEMPERATURE,
+        ///逆变器恢复温度
+        INVERTER_RECOVERY_TEMPERATURE,
+        ///预留
+        CALIBRATION_SWITCH,
+        ///预留
+        CALIBRATION_ANGLE,
+        ///执行器开关机
+        ACTUATOR_SWITCH,
+        ///执行器固件版本
+        FIRMWARE_VERSION,
+        ///执行器是否在线
+        ONLINE_STATUS,
+        ///执行器Id
+        DEVICE_ID,
+        ///执行器SN号
+        SN_ID,
+        ///执行器当前模式
+        MODE_ID,
+        ///错误代码
+        ERROR_ID,
+        ///累计运行时间
+        CUMULATIVE_TIME,
+        ///电流限制，任何情况下执行器电流的绝对值都不会超过此值
+        CURRENT_LIMIT,
+        ///速度限制，任何情况下执行器速度的绝对值都不会超过此值
+        VELOCITY_LIMIT,
+        ///抱闸
+        ACTUATOR_BRAKE,
+        ///连接执行器的中间板id
+        COMMUNICATION_ID,
+        ///预留
         RESERVE_0,
+        ///预留
         RESERVE_1,
+        ///预留
         RESERVE_2,
+        ///预留
         RESERVE_3,
+        ///预留
+        RESERVE_4,
+        ///预留
+        RESERVE_5,
         DATA_CNT,
-        DATA_CHART,//预留
+        DATA_CHART,///预留
         DATA_INVALID,
     };
 
@@ -257,6 +359,7 @@ namespace Actuator {
         D_SET_CURRENT_MAXSPEED=0x29,
         D_SET_SWITCH_MOTORS=0x2a,
         D_READ_MOTORS_SWITCH=0x2b,
+        D_SET_MOTOR_MAC=0x2c,
         D_SET_CURRENT_PID_MIN = 0x2e,//设置电流环的pid的上下限
         D_SET_CURRENT_PID_MAX=0x2f,
         D_SET_VELOCITY_PID_MIN=0x30,
@@ -297,6 +400,10 @@ namespace Actuator {
         D_READ_CURRENT_SCALE=0x53,
         D_SET_CUR_TRIGGER_MODE=0x54,//
         D_READ_MOTOR_MODE=0x55,
+        D_READ_CURRENT_LIMIT=0x59,
+        D_SET_CURRENT_LIMIT=0x58,
+        D_READ_VELOCITY_LIMIT=0x5b,
+        D_SET_VELOCITY_LIMIT=0x5a,
         D_READ_TEMP_MOTOR=0x5f,
         D_READ_TEMP_INVERTER=0x60,
         D_SET_TEMP_PROTECT=0x6b,
@@ -349,11 +456,16 @@ namespace Actuator {
         D_SET_CALIBRATION_ANGLE=0xa3,
         D_READ_CALIBRATION_ANGLE=0xa4,
         D_SWITCH_CALIBRATION_VEL=0xa5,
+        D_SET_ACTUATOR_BRAKE=0xb6,
+        D_READ_ACTUATOR_BRAKE=0xb5,
+        D_INIT_430=0xb1,
 
         D_READ_RESERVE_0=0xd0,
         D_READ_RESERVE_1=0xd1,
         D_READ_RESERVE_2=0xd2,
         D_READ_RESERVE_3=0xd3,
+        D_READ_RESERVE_4=0xd4,
+        D_READ_RESERVE_5=0xd5,
         D_READ_LAST_STATE=0xb0,//读取上一次状态（是否正常关机）
 
         D_IP_BROADCAST=0xc0,//广播查找ip地址
