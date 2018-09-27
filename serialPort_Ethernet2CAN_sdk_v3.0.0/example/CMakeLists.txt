@@ -8,7 +8,9 @@ SET(EXAMPLE_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/src/monitorActuator.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/operateActuator.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/tuneActuator.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/homingActuator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/homingActuator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/feedback_sync.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/longIdAndByteId.cpp
 )
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

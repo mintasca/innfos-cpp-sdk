@@ -26,7 +26,7 @@ void keyboardInput()
             cin >> v;
             if(!cin.fail())
             {
-                value = v*1000;
+                 value = v*1000;
                 directive = d;
             }
         }
