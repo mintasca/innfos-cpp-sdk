@@ -69,7 +69,17 @@ int main(int argc, char *argv[])
         }
     });
 
-
+    //关联错误信号
+    int nErrorConnection = pController->m_sError->s_Connect([=](uint8_t nDeviceId,uint16_t nErrorType,string errorInfo){
+        if(nDeviceId==0)
+        {
+            cout << "Error: " << (int)nErrorType << " " << errorInfo << endl;
+        }
+        else
+        {
+            cout << "Actuator " << (int)nDeviceId << " " <<"error " << (int)nErrorType << " " << errorInfo << endl;
+        }
+    });
     //自动识别已连接执行器
     pController->autoRecoginze();
     //执行控制器事件循环
@@ -80,6 +90,6 @@ int main(int argc, char *argv[])
 
     //断开信号连接
     pController->m_sOperationFinished->s_Disconnect(nOperationConnection);
-
+    pController->m_sError->s_Disconnect(nErrorConnection);
     return 0;
 }
