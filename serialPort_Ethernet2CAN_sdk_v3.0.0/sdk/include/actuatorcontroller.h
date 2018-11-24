@@ -626,6 +626,16 @@ public:
      * @return 返回设置是否成功
      */
     bool setActuatorAttributeWithACK(uint64_t longId, ActuatorAttribute attrId, double value);
+    /**
+     * @brief getCVPValue 获取电流速度位置的值(如果同时需要三个值，该接口效率比较高）
+     * @param id 执行器短id
+     */
+    void getCVPValue(uint8_t id);
+    /**
+     * @brief getCVPValue 获取电流速度位置的值(如果同时需要三个值，该接口效率比较高）
+     * @param longId 执行器长id
+     */
+    void getCVPValue(uint64_t longId);
     //v3.0 add end
     void switchCalibrationVel(uint64_t longId,uint8_t nValue);
     void switchCalibration(uint64_t longId,uint8_t nValue);

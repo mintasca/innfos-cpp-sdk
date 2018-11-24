@@ -46,10 +46,12 @@ namespace Actuator {
         ERR_CAN_COMMUNICATION=0x80,
     ///执行器温度传感器错误
         ERR_ACTUATOR_TEMPERATURE_SENSOR=0x100,
+    ///阶跃过大
+        ERR_STEP_OVER=0x200,
     ///执行器DRV保护
         ERR_DRV_PROTECTION=0x400,
-    ///执行器ID不唯一错误
-        ERR_ID_UNUNIQUE=0x800,
+    ///编码器失效
+        ERR_CODER_DISABLED=0x800,
     ///执行器未连接错误
         ERR_ACTUATOR_DISCONNECTION=0x801,
     ///CAN通信转换板未连接错误
@@ -62,6 +64,8 @@ namespace Actuator {
         ERR_SHUTDOWN_SAVING=0x805,
         ///通信端口已绑定
         ERR_IP_HAS_BIND=0x806,
+        ///执行器ID不唯一错误
+        ERR_ID_UNUNIQUE=0x807,
         ERR_UNKOWN=0xffff
     };
 
@@ -113,6 +117,12 @@ namespace Actuator {
         Via_Ethernet,
         ///串口通信
         Via_Serialport,
+    };
+
+    ///
+    enum Initlize_state{
+        Uninitlized,
+        Initlized,
     };
 
 
@@ -296,6 +306,10 @@ namespace Actuator {
         ACTUATOR_BRAKE,
         ///连接执行器的中间板id
         COMMUNICATION_ID,
+        ///初始化状态
+        INIT_STATE,
+        ///装载器版本,不可重复读取
+        LOADER_VERSION,
         ///预留
         RESERVE_0,
         ///预留
@@ -308,6 +322,12 @@ namespace Actuator {
         RESERVE_4,
         ///预留
         RESERVE_5,
+        ///预留
+        RESERVE_6,
+        ///预留
+        RESERVE_7,
+        ///预留
+        RESERVE_8,
         DATA_CNT,
         DATA_CHART,///预留
         DATA_INVALID,
@@ -450,6 +470,8 @@ namespace Actuator {
         D_SET_HOMING_CUR_MAX=0x91,
         D_READ_HOMING_CUR_MIN=0x92,
         D_READ_HOMING_CUR_MAX=0x93,
+        D_READ_ACTUAL_CVP=0x94,
+        D_READ_LOADER_VERSION=0x99,
         D_SWITCH_CALIBRATION=0xa0,
         D_READ_CALIBRATION_SWITCH=0xa1,
         D_START_CALIBRATION=0xa2,
@@ -466,6 +488,9 @@ namespace Actuator {
         D_READ_RESERVE_3=0xd3,
         D_READ_RESERVE_4=0xd4,
         D_READ_RESERVE_5=0xd5,
+        D_READ_RESERVE_6=0xd6,
+        D_READ_RESERVE_7=0xd7,
+        D_READ_RESERVE_8=0xd8,
         D_READ_LAST_STATE=0xb0,//读取上一次状态（是否正常关机）
 
         D_IP_BROADCAST=0xc0,//广播查找ip地址

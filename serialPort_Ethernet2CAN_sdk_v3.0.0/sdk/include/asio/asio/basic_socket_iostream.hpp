@@ -326,7 +326,7 @@ public:
    * @code tcp::iostream s("www.boost.org", "http");
    * if (!s)
    * {
-   *   std::cout << "Error: " << s.error().message() << std::endl;
+   *   //std::cout << "Error: " << s.error().message() << std::endl;
    * } @endcode
    */
   const asio::error_code& error() const

@@ -295,8 +295,8 @@ Iterator connect(basic_socket<Protocol ASIO_SVC_TARG>& s,
  *       const asio::error_code& ec,
  *       const::tcp::endpoint& next)
  *   {
- *     if (ec) std::cout << "Error: " << ec.message() << std::endl;
- *     std::cout << "Trying: " << next << std::endl;
+ *     if (ec) //std::cout << "Error: " << ec.message() << std::endl;
+ *     //std::cout << "Trying: " << next << std::endl;
  *     return true;
  *   }
  * }; @endcode
@@ -306,7 +306,7 @@ Iterator connect(basic_socket<Protocol ASIO_SVC_TARG>& s,
  * tcp::socket s(io_context);
  * tcp::endpoint e = asio::connect(s,
  *     r.resolve(q), my_connect_condition());
- * std::cout << "Connected to: " << e << std::endl; @endcode
+ * //std::cout << "Connected to: " << e << std::endl; @endcode
  */
 template <typename Protocol ASIO_SVC_TPARAM,
     typename EndpointSequence, typename ConnectCondition>
@@ -355,8 +355,8 @@ typename Protocol::endpoint connect(
  *       const asio::error_code& ec,
  *       const::tcp::endpoint& next)
  *   {
- *     if (ec) std::cout << "Error: " << ec.message() << std::endl;
- *     std::cout << "Trying: " << next << std::endl;
+ *     if (ec) //std::cout << "Error: " << ec.message() << std::endl;
+ *     //std::cout << "Trying: " << next << std::endl;
  *     return true;
  *   }
  * }; @endcode
@@ -373,7 +373,7 @@ typename Protocol::endpoint connect(
  * }
  * else
  * {
- *   std::cout << "Connected to: " << e << std::endl;
+ *   //std::cout << "Connected to: " << e << std::endl;
  * } @endcode
  */
 template <typename Protocol ASIO_SVC_TPARAM,
@@ -509,8 +509,8 @@ Iterator connect(basic_socket<Protocol ASIO_SVC_TARG>& s, Iterator begin,
  *       const asio::error_code& ec,
  *       const::tcp::endpoint& next)
  *   {
- *     if (ec) std::cout << "Error: " << ec.message() << std::endl;
- *     std::cout << "Trying: " << next << std::endl;
+ *     if (ec) //std::cout << "Error: " << ec.message() << std::endl;
+ *     //std::cout << "Trying: " << next << std::endl;
  *     return true;
  *   }
  * }; @endcode
@@ -521,7 +521,7 @@ Iterator connect(basic_socket<Protocol ASIO_SVC_TARG>& s, Iterator begin,
  * tcp::socket s(io_context);
  * tcp::resolver::results_type::iterator i = asio::connect(
  *     s, e.begin(), e.end(), my_connect_condition());
- * std::cout << "Connected to: " << i->endpoint() << std::endl; @endcode
+ * //std::cout << "Connected to: " << i->endpoint() << std::endl; @endcode
  */
 template <typename Protocol ASIO_SVC_TPARAM,
     typename Iterator, typename ConnectCondition>
@@ -569,8 +569,8 @@ Iterator connect(basic_socket<Protocol ASIO_SVC_TARG>& s, Iterator begin,
  *       const asio::error_code& ec,
  *       const::tcp::endpoint& next)
  *   {
- *     if (ec) std::cout << "Error: " << ec.message() << std::endl;
- *     std::cout << "Trying: " << next << std::endl;
+ *     if (ec) //std::cout << "Error: " << ec.message() << std::endl;
+ *     //std::cout << "Trying: " << next << std::endl;
  *     return true;
  *   }
  * }; @endcode
@@ -588,7 +588,7 @@ Iterator connect(basic_socket<Protocol ASIO_SVC_TARG>& s, Iterator begin,
  * }
  * else
  * {
- *   std::cout << "Connected to: " << i->endpoint() << std::endl;
+ *   //std::cout << "Connected to: " << i->endpoint() << std::endl;
  * } @endcode
  */
 template <typename Protocol ASIO_SVC_TPARAM,
@@ -831,8 +831,8 @@ async_connect(basic_socket<Protocol ASIO_SVC_TARG>& s,
  *       const asio::error_code& ec,
  *       const::tcp::endpoint& next)
  *   {
- *     if (ec) std::cout << "Error: " << ec.message() << std::endl;
- *     std::cout << "Trying: " << next << std::endl;
+ *     if (ec) //std::cout << "Error: " << ec.message() << std::endl;
+ *     //std::cout << "Trying: " << next << std::endl;
  *     return true;
  *   }
  * }; @endcode
@@ -871,7 +871,7 @@ async_connect(basic_socket<Protocol ASIO_SVC_TARG>& s,
  *   }
  *   else
  *   {
- *     std::cout << "Connected to: " << endpoint << std::endl;
+ *     //std::cout << "Connected to: " << endpoint << std::endl;
  *   }
  * } @endcode
  */
@@ -995,8 +995,8 @@ async_connect(basic_socket<Protocol ASIO_SVC_TARG>& s, Iterator begin,
  *       const asio::error_code& ec,
  *       const::tcp::endpoint& next)
  *   {
- *     if (ec) std::cout << "Error: " << ec.message() << std::endl;
- *     std::cout << "Trying: " << next << std::endl;
+ *     if (ec) //std::cout << "Error: " << ec.message() << std::endl;
+ *     //std::cout << "Trying: " << next << std::endl;
  *     return true;
  *   }
  * }; @endcode
@@ -1036,7 +1036,7 @@ async_connect(basic_socket<Protocol ASIO_SVC_TARG>& s, Iterator begin,
  *   }
  *   else
  *   {
- *     std::cout << "Connected to: " << i->endpoint() << std::endl;
+ *     //std::cout << "Connected to: " << i->endpoint() << std::endl;
  *   }
  * } @endcode
  */

@@ -44,7 +44,7 @@ public:
     void reciveMotorInfo(uint32_t communicateUnitId,const uint32_t nDeviceMac, const uint8_t nDeviceId);
     void receiveNoDataProxy(const int nDeviceID);
     void checkServosStatus();//check servos are on or off
-    void recognizeFinished(std::multimap<uint32_t,std::pair<uint8_t,uint32_t>> motorsInfo);
+    void recognizeFinished(std::multimap<std::pair<uint8_t,uint32_t>,uint32_t> motorsInfo);
     void chartVauleChange(const int nChannelId,double values);//only use by chart
     asio::io_context * ioContext();
 #ifdef IMU_ENABLE
@@ -60,6 +60,7 @@ public:
     void reconnectDevice(uint64_t longId);
     void errorOccur(uint64_t longId,uint16_t errorId, std::string errorStr);
     void motorAttrChanged(uint64_t longId,uint8_t nAttrId,double value);
+    void receivePanelVersion(uint32_t communicationId,uint16_t softVersion,uint16_t hardVersion);
     static uint64_t toLongId(uint32_t communicationId, uint8_t byteId);
     static uint32_t toCommunicationId(uint64_t longId);
     static uint8_t toDeviceId(uint64_t longId);

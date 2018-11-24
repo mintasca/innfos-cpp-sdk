@@ -58,6 +58,7 @@ public:
     void switchCalibration(uint8_t nValue);
     void startCalibration();
     void requestSuccessfully(uint8_t nDataId);
+    void readStatus();
 protected:
     void setValue(int nDataId,double value,bool bEmitSignal = true);
     void userRequestValue(int nDataId,double value);
@@ -105,7 +106,7 @@ public:
 
     void setMotorDataAttrByProxy(const uint64_t longId,int proxyId,double value);//data from proxy
     void setMotorDataAttrInBatch(const std::list<uint64_t> idList,const Actuator::ActuatorAttribute attrId,double value,bool bSend=true);
-    void AddMotorsData(std::multimap<uint32_t,std::pair<uint8_t,uint32_t>> dataMap);
+    void AddMotorsData(std::multimap<std::pair<uint8_t, uint32_t>, uint32_t> dataMap);
     std::vector<uint64_t> getLongIdArray()const;
     std::vector<uint64_t> getLongIdGroup(uint64_t longId)const;
     std::vector<uint16_t> motorErrorHistory(const uint64_t longId)const;
@@ -166,6 +167,7 @@ private:
     ActuatorData * getMotorDataByLongId(const uint64_t longId)const;
     ActuatorData * getMotorDataByNewId(const uint64_t longId)const;//if device id changed by user, sometimes we need to find the motorData using NewId we set before.
     ActuatorData * getMotorDataByMac(const uint32_t nMac)const;
+    bool isUnique(const ActuatorData *pData)const;
 //    bool checkIdUnique(std::map<uint8_t,uint32_t> dataMap)const;//check all motors's id si unique or not, if not warning and exit the app
 //    void handleUnuiqueError(std::map<uint8_t,uint32_t> dataMap);
     double getMotorDataAttrValue(const uint64_t longId,const Actuator::ActuatorAttribute attrId)const;

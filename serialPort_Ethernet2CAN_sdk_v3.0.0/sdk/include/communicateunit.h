@@ -34,6 +34,10 @@ public:
     virtual std::string getCommunicationUnitName()const=0;
 //public slots:
     virtual void progress()=0;
+    void setSoftwareVersion(uint16_t version);
+    uint16_t readSoftwareVersion()const;
+    void setHardwareVersion(uint16_t version);
+    uint16_t readHardwareVersion()const;
 protected:
     void stopCommunication();
     std::map<uint8_t,std::vector <std::vector<uint8_t>>> m_dataMap;
@@ -45,6 +49,8 @@ protected:
     uint32_t m_nUnitId;
     uint8_t m_nConnectionStatus;
     std::list<uint8_t> m_relateIdList;//motors's ids whitch communicate via this unit
+    uint16_t m_hardwareVersion;
+    uint16_t m_softwareVersion;
     //asio m_unitAddr;
 public:
     CSignal<uint32_t,std::vector<uint8_t>& > m_sResponse;

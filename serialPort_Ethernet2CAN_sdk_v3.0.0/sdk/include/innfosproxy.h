@@ -61,12 +61,14 @@ public:
     }
 
     static std::vector<uint8_t> getProxyContent(const uint8_t nDeviceId,const int nProxyIdx);
-protected:
-private:
     enum TMP_DIRECTIVES{
         T_D_READ_QUATERNION=0x01,//读取四元数
         T_D_READ_ALL_QUATERNION=0x02,
+        T_D_READ_VERSION=0x04,
     };
+protected:
+private:
+
 
     static void decodeTmpCmd(uint32_t communicateUnitId,std::vector<uint8_t> &buf);//解析与中间板的协议指令，指令内容里还有指令符
 private:

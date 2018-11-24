@@ -23,6 +23,8 @@ public:
     int8_t ReadByte();
     uint8_t ReadUByte();
     int32_t ReadInt();
+    int32_t ReadThreeBytesAsInt();
+    int32_t ReadTwoBytesAsInt();
     uint32_t ReadUInt();
     void WriteByte(uint8_t c);
     void WriteShort(int16_t content);

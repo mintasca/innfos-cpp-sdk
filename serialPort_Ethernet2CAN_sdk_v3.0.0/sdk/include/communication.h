@@ -34,6 +34,10 @@ public:
 //public slots:
     void unitFinished(uint8_t unitId);
     std::string getCommunicateUnitName(uint32_t unitId)const;
+    void setSoftwareVersion(uint16_t version,uint32_t nUnitId);
+    uint16_t readSoftwareVersion(uint32_t nUnitId)const;
+    void setHardwareVersion(uint16_t version,uint32_t nUnitId);
+    uint16_t readHardwareVersion(uint32_t nUnitId)const;
 protected:
 
 //signals:
