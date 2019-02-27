@@ -39,7 +39,7 @@ void cmdOperation(char directive,double value)
     switch (directive)
     {
     case 'a'://激活执行器指定模式，指令格式：a 模式id（Actuator::ActuatorMode）
-        controllerInst->activeActuatorMode(idArray, Actuator::ActuatorMode((int)value));
+        controllerInst->activateActuatorMode(idArray, Actuator::ActuatorMode((int)value));
         break;
     case 'p'://指定执行器位置，指令格式：p 圈数（-127到127）
         for (int i = 0; i < idArray.size(); ++i)

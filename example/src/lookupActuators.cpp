@@ -57,11 +57,11 @@ int main(int argc, char *argv[])
     int nErrorConnection = pController->m_sError->s_Connect([=](uint8_t nDeviceId,uint16_t nErrorType,string errorInfo){
         if(nDeviceId==0)
         {
-            cout << "Error: " << (int)nErrorType << " " << errorInfo << endl;
+            cout << "Error: " << (int)nErrorType << " " << errorInfo.c_str() << endl;
         }
         else
         {
-            cout << "Actuator " << (int)nDeviceId << " " <<"error " << (int)nErrorType << " " << errorInfo << endl;
+            cout << "Actuator " << (int)nDeviceId << " " <<"error " << (int)nErrorType << " " << errorInfo.c_str() << endl;
         }
     });
     //自动识别已连接执行器
