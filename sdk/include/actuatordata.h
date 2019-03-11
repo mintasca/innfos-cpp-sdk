@@ -109,6 +109,7 @@ public:
     void setMotorDataAttrByProxy(const uint64_t longId,int proxyId,double value);//data from proxy
     void setMotorDataAttrInBatch(const std::list<uint64_t> idList,const Actuator::ActuatorAttribute attrId,double value,bool bSend=true);
     void AddMotorsData(std::multimap<std::pair<uint8_t, uint32_t>, uint32_t> dataMap);
+    void clearMotorsData();
     std::vector<uint64_t> getLongIdArray()const;
     std::vector<uint64_t> getLongIdGroup(uint64_t longId)const;
     std::vector<uint16_t> motorErrorHistory(const uint64_t longId)const;
