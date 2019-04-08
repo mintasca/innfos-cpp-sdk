@@ -1,4 +1,5 @@
 @echo off
+cd /d %~dp0
 SET var=%cd%
 ECHO %var%
 setx ACTUATOR_TOOL_PATH %var%
