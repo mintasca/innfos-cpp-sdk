@@ -6,6 +6,7 @@
 #include <thread>
 #include <signal.h>
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 bool bExit = false;
