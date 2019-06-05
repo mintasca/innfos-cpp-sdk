@@ -37,7 +37,7 @@ namespace Actuator {
     ///执行器过温错误
         ERR_ACTUATOR_OVERHEATING=0x08,
     ///执行器读写错误
-        ERR_ACTUATOR_READ_OR_WIRTE=0x10,
+        ERR_ACTUATOR_READ_OR_WRITE=0x10,
     ///执行器多圈计数错误
         ERR_ACTUATOR_MULTI_TURN=0x20,
     ///执行器逆变器温度器错误
@@ -313,8 +313,7 @@ namespace Actuator {
         ///装载器版本,不可重复读取
         LOADER_VERSION,
         VERSION_430,
-        DY_FRENQUENCY_430,
-        STC_FRENQUENCY_430,
+        FRENQUENCY_430,
         ///预留
         RESERVE_0,
         ///预留
@@ -483,14 +482,12 @@ namespace Actuator {
         D_SET_CALIBRATION_ANGLE=0xa3,
         D_READ_CALIBRATION_ANGLE=0xa4,
         D_SWITCH_CALIBRATION_VEL=0xa5,
-        D_SET_430_DY_FREQUENCY=0xae,
-        D_READ_430_DY_FREQUENCY=0xaf,
+        D_SET_430_FREQUENCY=0xb3,
+        D_READ_430_FREQUENCY=0xb4,
         D_SET_ACTUATOR_BRAKE=0xb6,
         D_READ_ACTUATOR_BRAKE=0xb5,
         D_INIT_430=0xb1,
         D_READ_430_VERSION=0xb2,
-        D_SET_430_STC_FREQUENCY=0xb3,
-        D_READ_430_STC_FREQUENCY=0xb4,
         D_READ_RESERVE_0=0xd0,
         D_READ_RESERVE_1=0xd1,
         D_READ_RESERVE_2=0xd2,

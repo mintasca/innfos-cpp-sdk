@@ -59,6 +59,7 @@ public:
     void startCalibration();
     void requestSuccessfully(uint8_t nDataId);
     void readStatus();
+    bool waitForACK(const ActuatorAttribute attrId)const;
 protected:
     void setValue(int nDataId,double value,bool bEmitSignal = true);
     void userRequestValue(int nDataId,double value);

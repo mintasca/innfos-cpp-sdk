@@ -5,6 +5,7 @@
 #include <vector>
 #include <list>
 #include <mutex>
+#include <condition_variable>
 #include "CSignal.hpp"
 #include <thread>
 
@@ -45,7 +46,8 @@ protected:
     std::vector<std::vector<uint8_t>> m_dataVector;
     std::vector<std::vector<uint8_t>> m_dataVectorFast;//datas in this vector will be send very fast
     std::mutex m_qmMutex;
-    std::mutex m_logMutex;
+    std::mutex m_dataMutex;
+    std::condition_variable wait_cond;
     bool m_bStop;
     std::thread *m_pCommunicateThread;
     uint32_t m_nUnitId;
