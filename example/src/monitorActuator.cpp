@@ -5,6 +5,7 @@
 #include "actuatorcontroller.h"
 #include <thread>
 #include <signal.h>
+#include <string.h>
 using namespace std;
 
 bool bExit = false;

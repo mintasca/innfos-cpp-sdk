@@ -6,7 +6,7 @@
 #include <thread>
 #include <signal.h>
 #include <atomic>
-#include <string>
+#include <string.h>
 using namespace std;
 
 atomic_bool bExit{false};
