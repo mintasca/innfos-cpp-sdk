@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/feedback_sync.dir/src/feedback_sync.cpp.o  -o bin/feedback_sync  -L/home/liangzhenjie/work/ActuatorController_SDK/example/../sdk/lib/linux_x86_64 -rdynamic -lactuatorController -lpthread -Wl,-rpath,/home/liangzhenjie/work/ActuatorController_SDK/example/../sdk/lib/linux_x86_64 

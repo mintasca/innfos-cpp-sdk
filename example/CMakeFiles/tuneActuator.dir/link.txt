@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/tuneActuator.dir/src/tuneActuator.cpp.o  -o bin/tuneActuator  -L/home/liangzhenjie/work/ActuatorController_SDK/example/../sdk/lib/linux_x86_64 -rdynamic -lactuatorController -lpthread -Wl,-rpath,/home/liangzhenjie/work/ActuatorController_SDK/example/../sdk/lib/linux_x86_64 
