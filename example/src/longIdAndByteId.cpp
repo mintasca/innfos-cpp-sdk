@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
                 vector<uint8_t> idArray = pController->getActuatorIdArray();
                 for (uint64_t id: longIdArray) {
                 //获取长id中的通信ip地址
-                    cout << "Communication IP is " << pController->toString(id) << endl;
+                    std::cout << "Communication IP is " << pController->toString(id) << endl;
                     //longId转换成byteId
                     cout << "Long id " << id << " convert to byte id " << (int)pController->toByteId(id) << endl;
                 }

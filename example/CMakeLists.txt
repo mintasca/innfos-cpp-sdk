@@ -1,16 +1,26 @@
 ﻿cmake_minimum_required(VERSION 3.0)
 project(example)
 
-SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include)
+SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../ActuatorController/ActuatorController)
 
 SET(EXAMPLE_SOURCES
-	${CMAKE_CURRENT_SOURCE_DIR}/src/lookupActuators.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/monitorActuator.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/operateActuator.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/tuneActuator.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/homingActuator.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/feedback_sync.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/longIdAndByteId.cpp
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/lookupActuators.cpp
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/monitorActuator.cpp
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/operateActuator.cpp
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/tuneActuator.cpp
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/homingActuator.cpp
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/feedback_sync.cpp
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/longIdAndByteId.cpp
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/newVersionTest.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/01_lookupActuators.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02a_launchSingleActuator.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02b_launchActuatorsInBatch.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/03a_currentControl.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/03b_velocityControl.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/03c_positionControl.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/01_actuatorSetting.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/02a_feedback_sync.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/02b_feedback_asyc.cpp
 )
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
