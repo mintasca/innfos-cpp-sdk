@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.0)
 project(example)
 
-SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../ActuatorController/ActuatorController)
+SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include)
 
 SET(EXAMPLE_SOURCES
 
