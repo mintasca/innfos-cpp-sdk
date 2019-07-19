@@ -4,14 +4,7 @@ project(example)
 SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../ActuatorController/ActuatorController)
 
 SET(EXAMPLE_SOURCES
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/lookupActuators.cpp
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/monitorActuator.cpp
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/operateActuator.cpp
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/tuneActuator.cpp
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/homingActuator.cpp
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/feedback_sync.cpp
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/longIdAndByteId.cpp
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/newVersionTest.cpp
+
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/01_lookupActuators.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02a_launchSingleActuator.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02b_launchActuatorsInBatch.cpp
@@ -58,14 +51,14 @@ foreach(EXAMPLE ${EXAMPLE_SOURCES})
     get_filename_component(EX_NAME ${EXAMPLE} NAME_WE)
     add_executable(${EX_NAME} ${EXAMPLE})
     if(WIN32)
-        target_link_libraries(${EX_NAME} debug actuatorControllerd optimized actuatorController)
+        target_link_libraries(${EX_NAME} debug actuatorControllerd optimized ActuatorController)
         add_custom_command(TARGET ${EX_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${COPY_LIBRARY}" "${COPY_LIBRARYD}"
         $<TARGET_FILE_DIR:${EX_NAME}>
         )
     elseif(UNIX)
-        target_link_libraries(${EX_NAME} actuatorController pthread)
+        target_link_libraries(${EX_NAME} ActuatorController pthread)
     endif()
 endforeach(EXAMPLE ${EXAMPLE_SOURCES})
 
