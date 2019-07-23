@@ -170,40 +170,183 @@ public:
     /**
  * @brief 获取当前位置
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次位置读取,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次位置读取,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前位置，单位是转数
 **/
     double getPosition(uint8_t id,bool bRefresh,const string & ipAddress="")const;
 
     /**
-     * @brief setPositionKp 设置位置环的比例
+     * @brief 设置位置环的比例
      * @param id 执行器id
      * @param Kp 位置环的比例
      * @param ipAddress 目标ip地址字符串
      */
     void setPositionKp(uint8_t id,double Kp,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的比例
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次位置环的比例,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的比例
+     */
     double getPostionKp(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的积分
+     * @param id 执行器id
+     * @param Ki 位置环的积分
+     * @param ipAddress 目标ip地址字符串
+     */
     void setPositionKi(uint8_t id,double Ki,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的积分
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次位置环的积分,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的积分
+     */
     double getPostionKi(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的微分
+     * @param id 执行器id
+     * @param Ki 位置环的微分
+     * @param ipAddress 目标ip地址字符串
+     */
     void setPositionKd(uint8_t id,double Kd,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的微分
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次位置环的微分,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的微分
+     */
     double getPostionKd(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的最大输出限幅
+     * @param id 执行器id
+     * @param max 位置环的最大输出限幅,有效值范围为(0,1]
+     * @param ipAddress 目标ip地址字符串
+     */
     void setPositionUmax(uint8_t id,double max,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的最大输出限幅
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次最大输出限幅,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的最大输出限幅
+     */
     double getPostionUmax(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的最小输出限幅
+     * @param id 执行器id
+     * @param min 位置环的最小输出限幅,有效值范围为[-1,0)
+     * @param ipAddress 目标ip地址字符串
+     */
     void setPositionUmin(uint8_t id,double min,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的最小输出限幅
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次最小输出限幅,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的最小输出限幅
+     */
     double getPostionUmin(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的限位偏移
+     * @param id 执行器id
+     * @param offset 位置环的限位偏移
+     * @param ipAddress 目标ip地址字符串
+     */
     void setPositionOffset(uint8_t id, double offset, const string & ipAddress="");
+    /**
+     * @brief 获取位置环的限位偏移
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次限位偏移,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的限位偏移
+     */
     double getPostionOffset(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的最大限位
+     * @param id 执行器id
+     * @param maxPos 位置环的最大限位
+     * @param ipAddress 目标ip地址字符串
+     */
     void setMaximumPosition(uint8_t id,double maxPos,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的最大限位
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次最大限位,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的最大限位
+     */
     double getMaximumPostion(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置位置环的最小限位
+     * @param id 执行器id
+     * @param minPos 位置环的最小限位
+     * @param ipAddress 目标ip地址字符串
+     */
     void setMinimumPosition(uint8_t id,double minPos,const string & ipAddress="");
+    /**
+     * @brief 获取位置环的最小限位
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次最小限位,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环的最小限位
+     */
     double getMinimumPostion(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 使能/失能执行器限位功能，失能后速度模式和电流模式将不受限位影响
+     * @param id 执行器id
+     * @param enable 使能/失能
+     * @param ipAddress ipAddress 目标ip地址字符串
+     */
     void enablePositionLimit(uint8_t id, bool enable, const string & ipAddress="");
+    /**
+     * @brief 读取执行器限位功能使能/失能
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次限位功能使能/失能,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return
+     */
     bool isPostionLimitEnable(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置执行器的零位
+     * @param id 执行器id
+     * @param homingPos 执行器的零位
+     * @param ipAddress 目标ip地址字符串
+     */
     void setHomingPosition(uint8_t id,double homingPos,const string & ipAddress="");
+    /**
+     * @brief 使能/失能位置环滤波功能，该功能为一阶低通滤波
+     * @param id 执行器id
+     * @param enable 使能/失能
+     * @param ipAddress ipAddress 目标ip地址字符串
+     */
     void enablePositionFilter(uint8_t id,bool enable,const string & ipAddress="");
+    /**
+     * @brief 读取执位置环滤波功能使能/失能
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次位置环滤波功能使能/失能,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return
+     */
     bool isPositionFilterEnable(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 获取位置环低通滤波频率
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次低通滤波频率,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 位置环低通滤波频率
+     */
     double getPositionCutoffFrequency(uint8_t id, bool bRefresh, const string &ipAddress="") const;
+    /**
+     * @brief 设置位置环低通滤波频率
+     * @param id 执行器id
+     * @param frequency 位置环低通滤波频率
+     * @param ipAddress 目标ip地址字符串
+     */
     void setPositionCutoffFrequency(uint8_t id, double frequency, const string &ipAddress="");
     /**
  * @brief 清除homing信息，包括左右极限和0位
@@ -212,11 +355,50 @@ public:
 **/
     void clearHomingInfo(uint8_t id,const string & ipAddress="");
     //profile position
+    /**
+     * @brief 设置Profile position模式的加速度
+     * @param id 执行器id
+     * @param acceleration Profile position模式的加速度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setProfilePosAcceleration(uint8_t id, double acceleration, const string & ipAddress="");
+    /**
+     * @brief 获取Profile position模式的加速度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次Profile position模式的加速度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return Profile position模式的加速度
+     */
     double getProfilePosAcceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置Profile position模式的减速度
+     * @param id 执行器id
+     * @param deceleration Profile position模式的减速度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setProfilePosDeceleration(uint8_t id, double deceleration, const string & ipAddress="");
+    /**
+     * @brief 获取Profile position模式的减速度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次Profile position模式的减速度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return Profile position模式的减速度
+     */
     double getProfilePosDeceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置Profile position模式的最大速度
+     * @param id 执行器id
+     * @param maxVelocity Profile position模式的最大速度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setProfilePosMaxVelocity(uint8_t id, double maxVelocity, const string & ipAddress="");
+    /**
+     * @brief 获取Profile position模式的最大速度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次Profile position模式的最大速度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return Profile position模式的最大速度
+     */
     double getProfilePosMaxVelocity(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     //velocity loop
     /**
@@ -247,7 +429,6 @@ public:
  * @param id 执行器id
  * @param 比例
  * @param ipAddress 目标ip地址字符串
- * @return 设置成功或失败
 **/
     void setVelocityKp(uint8_t id,double Kp,const string & ipAddress="");
 
@@ -279,7 +460,7 @@ public:
     /**
      * @brief 设置速度环最大输出限幅
      * @param id 执行器id
-     * @param max 最大输出限幅
+     * @param max 最大输出限幅,有效值范围为（0,1]
      * @param ipAddress 目标ip地址字符串
      * @return 设置成功或失败
      */
@@ -296,22 +477,94 @@ public:
     /**
      * @brief 设置速度环最小输出限幅
      * @param id 执行器id
-     * @param min 最小输出限幅
+     * @param min 最小输出限幅,有效值范围为[-1,0)
      * @param ipAddress 目标ip地址字符串
      * @return 设置成功或失败
      */
     void setVelocityUmin(uint8_t id, double min, const string &ipAddress="");
+    /**
+     * @brief 获取执行器速度量程，单位RPM
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次执行器速度量程,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器速度量程
+     */
     double getVelocityRange(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 使能/失能速度环滤波功能，该功能为一阶低通滤波
+     * @param id 执行器id
+     * @param enable 使能/失能
+     * @param ipAddress ipAddress 目标ip地址字符串
+     */
     void enableVelocityFilter(uint8_t id,bool enable,const string & ipAddress="");
+    /**
+     * @brief 读取执速度环滤波功能使能/失能
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次速度环滤波功能使能/失能,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 速度环滤波功能使能/失能
+     */
     bool isVelocityFilterEnable(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 获取速度环低通滤波频率
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次低通滤波频率,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 速度环低通滤波频率
+     */
     double getVelocityCutoffFrequency(uint8_t id, bool bRefresh, const string &ipAddress="") const;
+    /**
+     * @brief 设置速度环低通滤波频率
+     * @param id 执行器id
+     * @param frequency 速度环低通滤波频率
+     * @param ipAddress 目标ip地址字符串
+     */
     void setVelocityCutoffFrequency(uint8_t id, double frequency, const string &ipAddress="");
+    /**
+     * @brief 设置执行器速度限制
+     * @param id 执行器id
+     * @param limit 执行器速度限制，单位是RPM,该值不会超过速度量程
+     * @param ipAddress 目标ip地址字符串
+     */
     void setVelocityLimit(uint8_t id,double limit,const string & ipAddress="");
+    /**
+     * @brief 获取执行器速度限制
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次执行器速度限制,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器速度限制
+     */
     double getVelocityLimit(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     //profile velocity
+    /**
+     * @brief 设置Profile velocity模式的加速度
+     * @param id 执行器id
+     * @param acceleration Profile velocity模式的加速度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setProfileVelocityAcceleration(uint8_t id,double minPos,const string & ipAddress="");
+    /**
+     * @brief 获取Profile velocity模式的加速度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次Profile velocity模式的加速度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return Profile velocity模式的加速度
+     */
     double getProfileVelocityAcceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置Profile velocity模式的减速度
+     * @param id 执行器id
+     * @param deceleration Profile velocity模式的减速度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setProfileVelocityDeceleration(uint8_t id,double minPos,const string & ipAddress="");
+    /**
+     * @brief 获取Profile velocity模式的减速度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次Profile velocity模式的减速度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return Profile velocity模式的减速度
+     */
     double getProfileVelocityDeceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
 
     //current loop
@@ -347,12 +600,58 @@ public:
  * @return 当前电流环积分
 **/
     double getCurrentKi(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 获取执行器电流量程，单位A
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次执行器电流量程,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器电流量程
+     */
     double getCurrentRange(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 使能/失能电流环滤波功能，该功能为一阶低通滤波
+     * @param id 执行器id
+     * @param enable 使能/失能
+     * @param ipAddress ipAddress 目标ip地址字符串
+     */
     void enableCurrentFilter(uint8_t id,bool enable,const string & ipAddress="");
+    /**
+     * @brief 读取执电流环滤波功能使能/失能
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电流环滤波功能使能/失能,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 电流环滤波功能使能/失能
+     */
     bool isCurrentFilterEnable(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 获取电流环低通滤波频率
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次低通滤波频率,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 电流环低通滤波频率
+     */
     double getCurrentCutoffFrequency(uint8_t id, bool bRefresh, const string &ipAddress="") const;
+    /**
+     * @brief 设置电流环低通滤波频率
+     * @param id 执行器id
+     * @param frequency 电流环低通滤波频率
+     * @param ipAddress 目标ip地址字符串
+     */
     void setCurrentCutoffFrequency(uint8_t id, double frequency, const string &ipAddress="");
+    /**
+     * @brief 设置执行器电流限制
+     * @param id 执行器id
+     * @param limit 执行器电流限制,单位是A，该值不会超过电流量程
+     * @param ipAddress 目标ip地址字符串
+     */
     void setCurrentLimit(uint8_t id,double limit,const string & ipAddress="");
+    /**
+     * @brief 获取执行器电流限制
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次执行器电流限制,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器电流限制
+     */
     double getCurrentLimit(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
  * @brief 执行器保存当前所有参数
@@ -412,23 +711,141 @@ public:
     void setCurrentChartMode(uint64_t longId, uint8_t mode);
 
     //other info
+    /**
+     * @brief 获取执行器电压
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次执行器电压,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器电压
+     */
     double getVoltage(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+
+    /**
+     * @brief 获取执行器堵转能量
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次执行器堵转能量,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器堵转能量，单位J
+     */
     double getLockEnergy(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置执行器堵转能量
+     * @param id 执行器id
+     * @param energy 执行器堵转能量，单位J
+     * @param ipAddress 目标ip地址字符串
+     */
     void setLockEnergy(uint8_t id,double energy,const string & ipAddress="");
+    /**
+     * @brief 获取电机温度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电机温度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 电机温度,单位℃
+     */
     double getMotorTemperature(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 获取逆变器温度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次逆变器温度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 逆变器温度,单位℃
+     */
     double getInverterTemperature(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 获取电机保护温度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电机保护温度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 电机保护温度,单位℃
+     */
     double getMotorProtectedTemperature(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置电机保护温度
+     * @param id 执行器id
+     * @param temp 电机保护温度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setMotorProtectedTemperature(uint8_t id,double temp,const string & ipAddress="");
+    /**
+     * @brief 获取电机恢复温度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电机恢复温度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 电机恢复温度,单位℃
+     */
     double getMotorRecoveryTemperature(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置电机恢复温度
+     * @param id 执行器id
+     * @param temp 电机恢复温度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setMotorRecoveryTemperature(uint8_t id,double temp,const string & ipAddress="");
+    /**
+      * @brief 获取逆变器保护温度
+      * @param id 执行器id
+      * @param bRefresh 是否需要刷新，如果为true，会自动请求一次逆变器保护温度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+      * @param ipAddress 目标ip地址字符串
+      * @return 逆变器保护温度,单位℃
+      */
     double getInverterProtectedTemperature(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置逆变器保护温度
+     * @param id 执行器id
+     * @param temp 逆变器保护温度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setInverterProtectedTemperature(uint8_t id,double temp,const string & ipAddress="");
+    /**
+     * @brief 获取逆变器恢复温度
+     * @param id 执行器id
+     * @param bRefresh 是否需要刷新，如果为true，会自动请求一次逆变器恢复温度,并等待返回，如果为false,则会立即返回最近一次请求位置返回的结果
+     * @param ipAddress 目标ip地址字符串
+     * @return 逆变器恢复温度,单位℃
+     */
     double getInverterRecoveryTemperature(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 设置逆变器恢复温度
+     * @param id 执行器id
+     * @param temp 逆变器恢复温度
+     * @param ipAddress 目标ip地址字符串
+     */
     void setInverterRecoveryTemperature(uint8_t id,double temp,const string & ipAddress="");
-    bool isOnline(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    /**
+     * @brief 执行器是否在线
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     * @return 在线状态
+     */
+    bool isOnline(uint8_t id,const string & ipAddress="")const;
+    /**
+     * @brief 设置执行器ID
+     * @param currentID 当前执行器id
+     * @param newID 执行器新ID
+     * @param ipAddress 目标ip地址字符串
+     * @return 是否修改成功
+     */
     bool setActuatorID(uint8_t currentID, uint8_t newID, const string & ipAddress="");
+    /**
+     * @brief 获取执行器序列号
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     * @return 执行器序列号
+     */
     uint32_t getActuatorSerialNumber(uint8_t id,const string & ipAddress="")const;
+    /**
+     * @brief 获取执行器当前模式
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     * @return 当前模式
+     */
     Actuator::ActuatorMode getActuatorMode(uint8_t id,const string & ipAddress="")const;
+    /**
+     * @brief 获取执行器错误代码
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     * @return 错误代码
+     */
     uint32_t getErrorCode(uint8_t id,const string & ipAddress="")const;
 
 
