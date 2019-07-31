@@ -47,7 +47,7 @@ public:
     void changeDemand(double value);//demand value change
     void switchAutoRequestActual(bool bStart);
     void setAutoRequestInterval(uint32_t mSec);
-
+    void enableHeartBeat(bool bEnable);
     void saveAllParams();
     void clearHomingInfo();
     void setHomingOperationMode(const uint8_t nMode);
@@ -139,6 +139,7 @@ public:
     void requestFailed(const uint64_t longId,const uint8_t nProxyId);
     void reconnect(uint64_t longId);
     void clearError(uint64_t longId);
+    void enableHeartBeat(uint64_t longId,bool bEnable);
 
     bool setMotorDataWithACK(const uint64_t longId,const Actuator::ActuatorAttribute attrId,double value,bool bSend=true);
     double regainAttrWithACK(const uint64_t longId,Actuator::ActuatorAttribute attrId,bool *bSuccess=nullptr);

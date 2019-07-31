@@ -92,9 +92,10 @@ public:
     vector<uint8_t>  getUnifiedIDGroup(const string& ipAddress);
 
 /**
- * @brief 启动所有执行器，若执行器未启动，需先调用此函数，调用后需要等待3秒后才能操作
+ * @brief 启动所有执行器
+ * @return 全部启动成功返回true，否则返回false
 **/
-    void launchAllActuators();
+    bool launchAllActuators();
     /**
  * @brief 关闭所有执行器
  * @date 2018/01/15
@@ -660,21 +661,6 @@ public:
 **/
     void saveAllParams(uint8_t id,const string & ipAddress="");
 
-    /**
-     * @brief setMinPosLimit 设置最小位置限制，值为当前电机位置
-     * @param id 执行器id
-     * @param ipAddress 目标ip地址字符串
-     */
-    void setMinPosLimit(uint8_t id,const string & ipAddress="");
-
-    /**
-     * @brief setMinPosLimit 设置最小位置限制
-     * @param id 执行器id
-     * @param posValue 最小位置限制
-     * @param ipAddress 目标ip地址字符串
-     */
-    void setMinPosLimit(uint8_t id,double posValue,const string & ipAddress="");
-
     //chart info
     void setChartFrequency(uint8_t id, double frequency, const string & ipAddress="");
     double getChartFrequency(uint8_t id,bool bRefresh,const string & ipAddress="")const;
@@ -819,6 +805,25 @@ public:
      */
     bool isOnline(uint8_t id,const string & ipAddress="")const;
     /**
+     * @brief 执行器是否已经启动
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     * @return 是否启动
+     */
+    bool isLaunched(uint8_t id,const string & ipAddress="")const;
+    /**
+     * @brief 使能执行器心跳功能，使能后自动刷新执行器在线状态和错误
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     */
+    void enableHeartbeat(uint8_t id,const string & ipAddress="")const;
+    /**
+     * @brief 失能执行器心跳功能，失能后关闭自动刷新执行器在线状态和错误
+     * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
+     */
+    void disableHeartbeat(uint8_t id,const string & ipAddress="")const;
+    /**
      * @brief 设置执行器ID
      * @param currentID 当前执行器id
      * @param newID 执行器新ID
@@ -847,9 +852,6 @@ public:
      * @return 错误代码
      */
     uint32_t getErrorCode(uint8_t id,const string & ipAddress="")const;
-
-
-
     /**
  * @brief 重新获取属性,将请求刷新属性
  * @param id 执行器id
@@ -929,7 +931,8 @@ public:
     void requestLossRatio();
     void receiveLossRatio(uint64_t nIMUId,uint32_t receive,uint32_t lost);
 #endif
-
+    void setActuatorAttribute(uint64_t longId,Actuator::ActuatorAttribute attrId,double value);
+    double getActuatorAttribute(uint64_t longId,Actuator::ActuatorAttribute attrId)const;
 private:
     //v3.0 add end
     void switchCalibrationVel(uint64_t longId,uint8_t nValue);
@@ -951,9 +954,9 @@ private:
     void clearHomingInfo(uint64_t longId);
     void saveAllParams(uint64_t id);
     void setActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,double value,const string & ipAddress="");
-    void setActuatorAttribute(uint64_t longId,Actuator::ActuatorAttribute attrId,double value);
+
     double getActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,const string & ipAddress="")const;
-    double getActuatorAttribute(uint64_t longId,Actuator::ActuatorAttribute attrId)const;
+
     double getCurrent(uint64_t longId,bool bRefresh=false)const;
     double getVelocity(uint64_t longId,bool bRefresh=false)const;
     double getPosition(uint64_t longId,bool bRefresh=false)const;
@@ -1055,6 +1058,7 @@ private:
     std::vector<int> *m_lConnectionIds;
     bool m_bInitFinished;
     Actuator::ErrorsDefine _errorCode;
+    int m_nLogPid;
 };
 
 #endif // MOTORSCONTROLLER_H
