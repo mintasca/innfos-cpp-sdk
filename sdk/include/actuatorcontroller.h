@@ -24,6 +24,10 @@ using namespace  std;
 using namespace Actuator;
 #define controllerInst ActuatorController::getInstance()
 
+
+/**
+ * @brief The ActuatorController class 执行器控制器类，所有与执行器相关的操作都在此类中
+ */
 class ACTUATORCONTROLLERSHARED_EXPORT ActuatorController
 {
 public:
@@ -32,7 +36,8 @@ protected:
     ActuatorController();
 public:
     /**
-     * @brief The UnifiedID struct
+     * @brief 执行器唯一ID,由执行器ID(actuatorID)和执行器通信地址(ipAddress)组成
+     * @warning 同一通信地址下的执行器ID不能重复，不同通信地址下的执行器ID可重复
      */
     struct UnifiedID
     {
@@ -47,7 +52,6 @@ public:
 
     /**
      * @brief 初始化控制器，使用控制器之前必须先初始化
-     * @param 执行器通信方式，默认为以太网通信
      */
     static ActuatorController * initController();
 
@@ -110,11 +114,10 @@ public:
     bool launchActuator(uint8_t id,const string & ipAddress="");
     /**
      * @brief 启动指定执行器
-     * @param id 执行器id
-     * @param ipAddress 目标ip地址字符串
+     * @param unifiedIDArray 执行器UnifiedID数组
      * @warning 执行器启动成功返回true,否则返回false
     **/
-    bool launchActuatorInBatch(const vector<UnifiedID>& actuators);
+    bool launchActuatorInBatch(const vector<UnifiedID>& unifiedIDArray);
     /**
  * @brief 关闭指定执行器
  * @param id 执行器id
@@ -138,7 +141,7 @@ public:
     void activateActuatorModeInBantch(vector<uint8_t> idArray, const Actuator::ActuatorMode nMode);
     /**
      * @brief 激活执行器的指定模式
-     * @param idArray 执行器UnifiedID数组
+     * @param UnifiedIDArray 执行器UnifiedID数组
      * @param nMode 要激活的模式
     **/
     void activateActuatorModeInBantch(vector<UnifiedID> UnifiedIDArray, const Actuator::ActuatorMode nMode);
@@ -210,7 +213,7 @@ public:
     /**
      * @brief 设置位置环的微分
      * @param id 执行器id
-     * @param Ki 位置环的微分
+     * @param Kd 位置环的微分
      * @param ipAddress 目标ip地址字符串
      */
     void setPositionKd(uint8_t id,double Kd,const string & ipAddress="");
@@ -412,7 +415,7 @@ public:
     /**
  * @brief 获取当前速度
  * @param id 执行器id
- * @param bRefresh是否需要刷新,如果为true，会自动请求一次速度读取,并等待返回，如果为false,则会立即返回最近一次请求速度返回的结果
+ * @param bRefresh 是否需要刷新,如果为true，会自动请求一次速度读取,并等待返回，如果为false,则会立即返回最近一次请求速度返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前速度，单位是转/每分钟
 **/
@@ -420,7 +423,7 @@ public:
     /**
  * @brief 获取速度环比例
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次速度环比例读取,并等待返回，如果为false,则会立即返回最近一次请求速度环比例返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次速度环比例读取,并等待返回，如果为false,则会立即返回最近一次请求速度环比例返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前速度环比例
 **/
@@ -428,7 +431,7 @@ public:
     /**
  * @brief 设置速度环比例
  * @param id 执行器id
- * @param 比例
+ * @param Kp 速度环比例
  * @param ipAddress 目标ip地址字符串
 **/
     void setVelocityKp(uint8_t id,double Kp,const string & ipAddress="");
@@ -436,7 +439,7 @@ public:
     /**
  * @brief 获取速度环积分
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次速度环积分读取,并等待返回，如果为false,则会立即返回最近一次请求速度环积分返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次速度环积分读取,并等待返回，如果为false,则会立即返回最近一次请求速度环积分返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前速度环积分
 **/
@@ -453,7 +456,7 @@ public:
     /**
  * @brief 获取速度环最大输出限幅
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次速度环最大输出限幅读取,并等待返回，如果为false,则会立即返回最近一次请求速度环最大输出限幅返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次速度环最大输出限幅读取,并等待返回，如果为false,则会立即返回最近一次请求速度环最大输出限幅返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 最大输出限幅
 **/
@@ -470,7 +473,7 @@ public:
     /**
  * @brief 获取速度环最小输出限幅
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次速度环最小输出限幅读取,并等待返回，如果为false,则会立即返回最近一次请求速度环最小输出限幅返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次速度环最小输出限幅读取,并等待返回，如果为false,则会立即返回最近一次请求速度环最小输出限幅返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 最小输出限幅
 **/
@@ -543,7 +546,7 @@ public:
      * @param acceleration Profile velocity模式的加速度
      * @param ipAddress 目标ip地址字符串
      */
-    void setProfileVelocityAcceleration(uint8_t id,double minPos,const string & ipAddress="");
+    void setProfileVelocityAcceleration(uint8_t id,double acceleration,const string & ipAddress="");
     /**
      * @brief 获取Profile velocity模式的加速度
      * @param id 执行器id
@@ -558,7 +561,7 @@ public:
      * @param deceleration Profile velocity模式的减速度
      * @param ipAddress 目标ip地址字符串
      */
-    void setProfileVelocityDeceleration(uint8_t id,double minPos,const string & ipAddress="");
+    void setProfileVelocityDeceleration(uint8_t id,double deceleration,const string & ipAddress="");
     /**
      * @brief 获取Profile velocity模式的减速度
      * @param id 执行器id
@@ -580,7 +583,7 @@ public:
     /**
  * @brief 获取当前电流
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次电流读取,并等待返回，如果为false,则会立即返回最近一次请求电流返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电流读取,并等待返回，如果为false,则会立即返回最近一次请求电流返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前电流，单位是A
 **/
@@ -588,7 +591,7 @@ public:
     /**
  * @brief 获取电流环比例
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次电流环比例读取,并等待返回，如果为false,则会立即返回最近一次请求电流环比例返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电流环比例读取,并等待返回，如果为false,则会立即返回最近一次请求电流环比例返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前电流环比例
 **/
@@ -596,7 +599,7 @@ public:
     /**
  * @brief 获取电流环积分
  * @param id 执行器id
- * @param bRefresh是否需要刷新，如果为true，会自动请求一次电流环积分读取,并等待返回，如果为false,则会立即返回最近一次请求电流环积分返回的结果
+ * @param bRefresh 是否需要刷新，如果为true，会自动请求一次电流环积分读取,并等待返回，如果为false,则会立即返回最近一次请求电流环积分返回的结果
  * @param ipAddress 目标ip地址字符串
  * @return 当前电流环积分
 **/
@@ -671,6 +674,7 @@ public:
     /**
  * @brief 开启图表指定通道
  * @param id 执行器id
+ * @param ipAddress 目标ip地址字符串
  * @param nChannelId 通道id（Actuator::channel_1到Actuator::channel_4）
 **/
     void openChartChannel(uint8_t id,uint8_t  nChannelId,const string & ipAddress="");
@@ -679,6 +683,7 @@ public:
  * @brief 关闭图表指定通道
  * @param id 执行器id
  * @param nChannelId 通道id（Actuator::channel_1到Actuator::channel_4）
+ * @param ipAddress 目标ip地址字符串
 **/
     void closeChartChannel(uint8_t id, uint8_t nChannelId,const string & ipAddress="");
 
@@ -856,24 +861,28 @@ public:
  * @brief 重新获取属性,将请求刷新属性
  * @param id 执行器id
  * @param attrId 执行器属性Id
+ * @param ipAddress 目标ip地址字符串
 **/
     void regainAttrbute(uint8_t id,uint8_t attrId,const string & ipAddress="");
 
     /**
  * @brief 获取执行器错误历史记录
  * @param id 执行器id
+ * @param ipAddress 目标ip地址字符串
 **/
     vector<uint16_t> getErrorHistory(uint8_t id,const string & ipAddress="");
 
     /**
  * @brief 执行器掉线重连
  * @param id 执行器id
+ * @param ipAddress 目标ip地址字符串
 **/
     void reconnect(uint8_t id,const string & ipAddress="");
 
     /**
  * @brief 执行器错误清除
  * @param id 执行器id
+ * @param ipAddress 目标ip地址字符串
 **/
     void clearError(uint8_t id,const string & ipAddress="");
 
@@ -887,6 +896,7 @@ public:
     /**
      * @brief getCVPValue 获取电流速度位置的值(如果同时需要三个值，该接口效率比较高）
      * @param id 执行器id
+     * @param ipAddress 目标ip地址字符串
      */
     void getCVPValue(uint8_t id,const string & ipAddress="");
 
