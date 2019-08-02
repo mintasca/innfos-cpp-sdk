@@ -11,9 +11,10 @@
 using namespace std;
 
 bool bExit = false;
+
 void processSignal(int sign)
 {
-    ActuatorController::getInstance()->closeAllActuators();
+    ActuatorController::getInstance()->disableAllActuators();
     this_thread::sleep_for(std::chrono::milliseconds(200));
     bExit = true;
 }
@@ -38,37 +39,43 @@ void paramFeedback(ActuatorController::UnifiedID uID,uint8_t paramType,double pa
 
 int main(int argc, char *argv[])
 {
-    //初始化控制器，
+    //Associate program interrupt signals and call processSignal when you end the program with ctrl-c
+    signal(SIGINT,processSignal);
+    //Initialize the controller
     ActuatorController * pController = ActuatorController::initController();
-    //ec 定义一个错误的类型，ec==0x00 代表无错误，ec会以引用的方式传递给pController->lookupActuators(ec)， 当错误发生时，ec的值会被sdk修改为相应的错误代码
+    //ec Define an error type, ec==0x00 means no error, ec will be passed to pcontroller-> lookupActuators(ec) by reference,
+    //when the error occurs, ec value will be modified by SDK to the corresponding error code
     Actuator::ErrorsDefine ec;
-    //查找已连接的执行器
+    //Find the connected actuators.
     pController->lookupActuators(ec);
-    //获取所有执行器ID数组
-    vector<uint8_t> actuators = pController->getActuatorIdArray();
-
-    if(actuators.size() > 0)
+    //Gets an array of all actuator IDs
+    vector<uint8_t> idArray = pController->getActuatorIdArray();
+    //If the size of the idArray is greater than zero, the connected actuators have been found
+    if(idArray.size() > 0)
     {
-        if(pController->launchActuator(actuators.at(0)))
+        //Enable actuator
+        if(pController->enableActuator(idArray.at(0)))
         {
-            cout << "Launch actuator " << (int)actuators.at(0) << " successfully!" << endl;
+            cout << "Enable actuator " << (int)idArray.at(0) << " successfully!" << endl;
         }
 
-        pController->addParamChangeCallback(paramFeedback);
+        //Add an actuator request parameter callback which will be invoked when the parameter request returns
+        pController->addParaRequestCallback(paramFeedback);
 
         while (!bExit) {
-            //事件轮询，轮询回调事件，事件触发调用相应回调函数
+            //Event polling, polling callback events, event triggering calls to the corresponding callback function
             ActuatorController::processEvents();
-            //异步请求执行器电流，速度，位置,当请求返回后，会通过轮询回调事件触发回调函数
-            pController->getCVPValue(actuators.at(0));
+            //Asynchronous request executor current, velocity, poistion, and when the request returns,
+            //the callback function is triggered by a polling callback event. This function does not block.
+            pController->requestCVPValue(idArray.at(0));
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
     else
     {
-        //ec=0x803 与ECB(ECU)通信失败
-        //ec=0x802 ECB(ECU)与执行器通信失败
+        //ec=0x803 Communication with ECB(ECU) failed
+        //ec=0x802 Communication with actuator failed
         cout << "Connected error code:" << hex << ec << endl;
     }
 

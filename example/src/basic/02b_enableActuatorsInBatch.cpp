@@ -1,5 +1,5 @@
 ﻿/*
-*查找已连接执行器
+*批量使能执行器
 */
 
 #include <iostream>
@@ -7,6 +7,7 @@
 #include <thread>
 #include <signal.h>
 #include <string.h>
+#include <chrono>
 using namespace std;
 
 
@@ -18,20 +19,23 @@ int main(int argc, char *argv[])
     //when the error occurs, ec value will be modified by SDK to the corresponding error code
     Actuator::ErrorsDefine ec;
     //Find the connected actuators and return the UnifiedID of all actuators found.
-    //UnifiedID is a structure composed of the actuator ID (actuatorID) and IP(ipAddress) of ECB(ECU)
     std::vector<ActuatorController::UnifiedID> uIDArray = pController->lookupActuators(ec);
     //If the size of the uIDArray is greater than zero, the connected actuators have been found
     if(uIDArray.size() > 0)
     {
-        for(auto uID : uIDArray)
+        //Enable all connected actuators
+        if(pController->enableActuatorInBatch(uIDArray))
         {
-            cout << "Actuator ID: "<<(int)uID.actuatorID << " IP address: " << uID.ipAddress.c_str() << endl;
+            cout << "All actuators have been enabled successfully! " << endl;
         }
+        //Disable all connected actuators
+        pController->disableAllActuators();
+        //insure that all actuators have been closed
+        this_thread::sleep_for(std::chrono::milliseconds(200));
+
     }
     else
     {
-        //ec=0x803 Communication with ECB(ECU) failed
-        //ec=0x802 Communication with actuator failed
         cout << "Connected error code:" << hex << ec << endl;
     }
 

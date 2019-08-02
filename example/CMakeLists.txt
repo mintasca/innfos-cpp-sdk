@@ -6,8 +6,8 @@ SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include)
 SET(EXAMPLE_SOURCES
 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/01_lookupActuators.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02a_launchSingleActuator.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02b_launchActuatorsInBatch.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02a_enableSingleActuator.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/02b_enableActuatorsInBatch.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/03a_currentControl.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/03b_velocityControl.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/basic/03c_positionControl.cpp

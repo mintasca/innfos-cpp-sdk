@@ -1,5 +1,5 @@
 ﻿/*
-*同步获取
+*使能单个执行器
 */
 
 #include <iostream>
@@ -25,26 +25,12 @@ int main(int argc, char *argv[])
     //If the size of the idArray is greater than zero, the connected actuators have been found
     if(idArray.size() > 0)
     {
-        uint8_t actuatorID = idArray.at(0);
-        //Enable actuator
-        if(pController->enableActuator(actuatorID))
+        //Enable an actuator
+        if(pController->enableActuator(idArray.at(0)))
         {
             cout << "Enable actuator " << (int)idArray.at(0) << " successfully!" << endl;
         }
-        //if obtain parameters of the actuator synchronously,there is some communication blocking time
-        /**
-         * Read the position of the actuator, if the second parameter is true, sdk will send the read position request to the actuator and wait for the return,
-         * otherwise, the result of the last request is returned immediately
-         **/
-        double pos = pController->getPosition(actuatorID,true);
-        /**
-         * Read the current of the actuator, if the second parameter is true, sdk will send the read current request to the actuator and wait for the return,
-         * otherwise, the result of the last request is returned immediately
-         **/
-        double cur = pController->getCurrent(actuatorID,true);
-        cout << "Actuator postion:" << pos << "R,current:" << cur << "A" <<endl;
-
-
+        //Disable an actuator
         pController->disableActuator(idArray.at(0));
         //insure that the actuator has been closed
         this_thread::sleep_for(std::chrono::milliseconds(200));
