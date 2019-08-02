@@ -22,6 +22,7 @@
 
 using namespace  std;
 using namespace Actuator;
+class ControllerUtil;
 #define controllerInst ActuatorController::getInstance()
 
 
@@ -658,11 +659,12 @@ public:
      */
     double getCurrentLimit(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
- * @brief 执行器保存当前所有参数
+ * @brief 执行器保存当前所有参数,如果修改参数以后没有保存，失能后将丢弃参数修改
  * @param id 执行器id
  * @param ipAddress 目标ip地址字符串
+ * @return 保存成功返回true,否则返回false
 **/
-    void saveAllParams(uint8_t id,const string & ipAddress="");
+    bool saveAllParams(uint8_t id,const string & ipAddress="");
 
     //chart info
     void setChartFrequency(uint8_t id, double frequency, const string & ipAddress="");
@@ -979,7 +981,7 @@ private:
     void setHomingOperationMode(uint8_t id,uint8_t nMode);
     void setHomingOperationMode(uint64_t longId,uint8_t nMode);
     void clearHomingInfo(uint64_t longId);
-    void saveAllParams(uint64_t id);
+    bool saveAllParams(uint64_t id);
     void setActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,double value,const string & ipAddress="");
 
     double getActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,const string & ipAddress="")const;
@@ -1086,6 +1088,7 @@ private:
     bool m_bInitFinished;
     Actuator::ErrorsDefine _errorCode;
     int m_nLogPid;
+    ControllerUtil * util;
 };
 
 #endif // MOTORSCONTROLLER_H

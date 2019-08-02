@@ -33,16 +33,6 @@ int main(int argc, char *argv[])
         //activate profile position mode
         pController->activateActuatorMode(actuatorID,Actuator::Mode_Profile_Pos);
 
-        //change acceleration to 1200 RPM/s
-        pController->setProfilePosAcceleration(actuatorID,1200);
-        //change deceleration to -1200 RPM/s
-        pController->setProfilePosDeceleration(actuatorID,-1200);
-        //change max velocity to 3000 RPM/s
-        pController->setProfilePosMaxVelocity(actuatorID,3000);
-        cout << "change position in high speed " << endl;
-        pController->setPosition(actuatorID,10);
-        this_thread::sleep_for(std::chrono::seconds(4));
-
         //change acceleration to 300 RPM/s
         pController->setProfilePosAcceleration(actuatorID,300);
         //change deceleration to -300 RPM/s
@@ -50,8 +40,25 @@ int main(int argc, char *argv[])
         //change max velocity to 500 RPM/s
         pController->setProfilePosMaxVelocity(actuatorID,500);
         cout << "change position in low speed " << endl;
-        pController->setPosition(actuatorID,-10);
+        pController->setPosition(actuatorID,-15);
         this_thread::sleep_for(std::chrono::seconds(5));
+
+
+        //change acceleration to 1200 RPM/s
+        pController->setProfilePosAcceleration(actuatorID,1200);
+        //change deceleration to -1200 RPM/s
+        pController->setProfilePosDeceleration(actuatorID,-1200);
+        //change max velocity to 3000 RPM/s
+        pController->setProfilePosMaxVelocity(actuatorID,3000);
+        cout << "change position in high speed " << endl;
+        pController->setPosition(actuatorID,15);
+        this_thread::sleep_for(std::chrono::seconds(4));
+
+        //Save parameters,or you will lose all changes after disable the actuator
+        if(pController->saveAllParams(actuatorID))
+        {
+            cout << "Save parameters sucessfully!" << endl;
+        }
 
         pController->disableActuator(idArray.at(0));
         //insure that the actuator has been closed
