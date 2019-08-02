@@ -96,34 +96,34 @@ public:
     vector<uint8_t>  getUnifiedIDGroup(const string& ipAddress);
 
 /**
- * @brief 启动所有执行器
- * @return 全部启动成功返回true，否则返回false
+ * @brief 使能所有执行器
+ * @return 全部使能成功返回true，否则返回false
 **/
-    bool launchAllActuators();
+    bool enableAllActuators();
     /**
- * @brief 关闭所有执行器
+ * @brief 失能所有执行器
  * @date 2018/01/15
 **/
-    void closeAllActuators();
+    void disableAllActuators();
 /**
- * @brief 启动指定执行器
+ * @brief 使能指定执行器
  * @param id 执行器id
  * @param ipAddress 目标ip地址字符串
  * @warning
 **/
-    bool launchActuator(uint8_t id,const string & ipAddress="");
+    bool enableActuator(uint8_t id,const string & ipAddress="");
     /**
-     * @brief 启动指定执行器
+     * @brief 使能指定执行器
      * @param unifiedIDArray 执行器UnifiedID数组
-     * @warning 执行器启动成功返回true,否则返回false
+     * @warning 执行器使能成功返回true,否则返回false
     **/
-    bool launchActuatorInBatch(const vector<UnifiedID>& unifiedIDArray);
+    bool enableActuatorInBatch(const vector<UnifiedID>& unifiedIDArray);
     /**
- * @brief 关闭指定执行器
+ * @brief 失能指定执行器
  * @param id 执行器id
  * @param ipAddress 目标ip地址字符串
 **/
-    void closeActuator(uint8_t id,const string & ipAddress="");
+    void disableActuator(uint8_t id,const string & ipAddress="");
 
     /**
      * @brief activateActuatorMode 激活单个执行器的指定模式
@@ -810,14 +810,14 @@ public:
      */
     bool isOnline(uint8_t id,const string & ipAddress="")const;
     /**
-     * @brief 执行器是否已经启动
+     * @brief 执行器是否已经使能
      * @param id 执行器id
      * @param ipAddress 目标ip地址字符串
-     * @return 是否启动
+     * @return 是否使能
      */
-    bool isLaunched(uint8_t id,const string & ipAddress="")const;
+    bool isEnable(uint8_t id,const string & ipAddress="")const;
     /**
-     * @brief 使能执行器心跳功能，使能后自动刷新执行器在线状态和错误
+     * @brief 使能执行器心跳功能，使能后自动刷新执行器在线状态和错误（默认状态为使能）
      * @param id 执行器id
      * @param ipAddress 目标ip地址字符串
      */
@@ -894,11 +894,11 @@ public:
 
 
     /**
-     * @brief getCVPValue 获取电流速度位置的值(如果同时需要三个值，该接口效率比较高）
+     * @brief requestCVPValue 获取电流速度位置的值(如果同时需要三个值，该接口效率比较高）
      * @param id 执行器id
      * @param ipAddress 目标ip地址字符串
      */
-    void getCVPValue(uint8_t id,const string & ipAddress="");
+    void requestCVPValue(uint8_t id,const string & ipAddress="");
 
 
     using doubleFuncPointer = void(*)(UnifiedID, uint8_t ,double);
@@ -906,10 +906,27 @@ public:
     using doubleFunction = function<void(UnifiedID, uint8_t ,double)>;
     using stringFunction = function<void(UnifiedID, uint16_t ,string)>;
 
-
-    void addParamChangeCallback(doubleFuncPointer callback);
-    void addParamChangeCallback(doubleFunction callback);
+    /**
+     * @brief addParaRequestCallback 增加参数请求回调函数，当参数请求返回结果后会触发回调
+     * @param callback 回调函数指针
+     */
+    void addParaRequestCallback(doubleFuncPointer callback);
+    /**
+     * @brief addParaRequestCallback 增加参数请求回调函数，当参数请求返回结果后会触发回调
+     * @param callback 回调函数function
+     */
+    void addParaRequestCallback(doubleFunction callback);
+    /**
+     * @brief addErrorCallback 增加错误回调函数，当执行器发生错误后会触发回调
+     * @param callback 回调函数指针
+     * @warning 当失能执行器heartbeat后，即调用disableHeartbeat后将不会上报错误
+     */
     void addErrorCallback(stringFuncPointer callback);
+    /**
+     * @brief addErrorCallback 增加错误回调函数，当执行器发生错误后会触发回调
+     * @param callback 回调函数function
+     * @warning 当失能执行器heartbeat后，即调用disableHeartbeat后将不会上报错误
+     */
     void addErrorCallback(stringFunction callback);
 
     /**

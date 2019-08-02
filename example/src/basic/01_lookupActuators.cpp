@@ -12,24 +12,26 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //初始化控制器，
+    //Initialize the controller
     ActuatorController * pController = ActuatorController::initController();
-    //ec 定义一个错误的类型，ec==0x00 代表无错误，ec会以引用的方式传递给pController->lookupActuators(ec)， 当错误发生时，ec的值会被sdk修改为相应的错误代码
+    //ec Define an error type, ec==0x00 means no error, ec will be passed to pcontroller-> lookupActuators(ec) by reference,
+    //when the error occurs, ec value will be modified by SDK to the corresponding error code
     Actuator::ErrorsDefine ec;
-    //查找已连接的执行器， 返回查找到的所有执行器的UnifiedID，UnifiedID是由执行器ID(actuatorID)和ECB(ECU)的IP(ipAddress)组成的结构体
-    std::vector<ActuatorController::UnifiedID> actuators = pController->lookupActuators(ec);
-
-    if(actuators.size() > 0)
+    //Find the connected actuators and return the UnifiedID of all actuators found.
+    //UnifiedID is a structure composed of the actuator ID (actuatorID) and IP(ipAddress) of ECB(ECU)
+    std::vector<ActuatorController::UnifiedID> uIDArray = pController->lookupActuators(ec);
+    //If the size of the uIDArray is greater than zero, the connected actuators have been found
+    if(uIDArray.size() > 0)
     {
-        for(auto actuator : actuators)
+        for(auto uID : uIDArray)
         {
-            cout << "Actuator ID: "<<(int)actuator.actuatorID << " IP address: " << actuator.ipAddress.c_str() << endl;
+            cout << "Actuator ID: "<<(int)uID.actuatorID << " IP address: " << uID.ipAddress.c_str() << endl;
         }
     }
     else
     {
-        //ec=0x803 与ECB(ECU)通信失败
-        //ec=0x802 ECB(ECU)与执行器通信失败
+        //ec=0x803 Communication with ECB(ECU) failed
+        //ec=0x802 Communication with actuator failed
         cout << "Connected error code:" << hex << ec << endl;
     }
 

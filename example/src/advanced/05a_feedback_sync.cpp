@@ -13,38 +13,46 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //初始化控制器，
+    //Initialize the controller
     ActuatorController * pController = ActuatorController::initController();
-    //ec 定义一个错误的类型，ec==0x00 代表无错误，ec会以引用的方式传递给pController->lookupActuators(ec)， 当错误发生时，ec的值会被sdk修改为相应的错误代码
+    //ec Define an error type, ec==0x00 means no error, ec will be passed to pcontroller-> lookupActuators(ec) by reference,
+    //when the error occurs, ec value will be modified by SDK to the corresponding error code
     Actuator::ErrorsDefine ec;
-    //查找已连接的执行器
+    //Find the connected actuators.
     pController->lookupActuators(ec);
-    //获取所有执行器ID数组
-    vector<uint8_t> actuators = pController->getActuatorIdArray();
-
-    if(actuators.size() > 0)
+    //Gets an array of all actuator IDs
+    vector<uint8_t> idArray = pController->getActuatorIdArray();
+    //If the size of the idArray is greater than zero, the connected actuators have been found
+    if(idArray.size() > 0)
     {
-        uint8_t actuatorID = actuators.at(0);
-        if(pController->launchActuator(actuatorID))
+        uint8_t actuatorID = idArray.at(0);
+        //Enable actuator
+        if(pController->enableActuator(actuatorID))
         {
-            cout << "Launch actuator " << (int)actuators.at(0) << " successfully!" << endl;
+            cout << "Enable actuator " << (int)idArray.at(0) << " successfully!" << endl;
         }
-        //同步方式获取执行器当前速度和电流，以同步方式获取执行器的参数，有一定的通信阻塞时间，适用于低频率读取控制执行器，如果想高频读取控制执行器，请使用异步回调方式
-        //请求执行器当前位置，第二个参数为true，将向执行器发送读取位置请求并等待返回
+        //if obtain parameters of the actuator synchronously,there is some communication blocking time
+        /**
+         * Read the position of the actuator, if the second parameter is true, sdk will send the read position request to the actuator and wait for the return,
+         * otherwise, the result of the last request is returned immediately
+         **/
         double pos = pController->getPosition(actuatorID,true);
-        //请求执行器当前电流，第二个参数为true，将向执行器发送读取位置请求并等待返回
+        /**
+         * Read the current of the actuator, if the second parameter is true, sdk will send the read current request to the actuator and wait for the return,
+         * otherwise, the result of the last request is returned immediately
+         **/
         double cur = pController->getCurrent(actuatorID,true);
-        cout << "current postion:" << pos << "R current current:" << cur << "A" <<endl;
+        cout << "Actuator postion:" << pos << "R,current:" << cur << "A" <<endl;
 
 
-        pController->closeActuator(actuators.at(0));
+        pController->disableActuator(idArray.at(0));
         //insure that the actuator has been closed
         this_thread::sleep_for(std::chrono::milliseconds(200));
     }
     else
     {
-        //ec=0x803 与ECB(ECU)通信失败
-        //ec=0x802 ECB(ECU)与执行器通信失败
+        //ec=0x803 Communication with ECB(ECU) failed
+        //ec=0x802 Communication with actuator failed
         cout << "Connected error code:" << hex << ec << endl;
     }
 

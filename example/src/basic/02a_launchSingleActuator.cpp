@@ -13,30 +13,32 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //初始化控制器，
+    //Initialize the controller
     ActuatorController * pController = ActuatorController::initController();
-    //ec 定义一个错误的类型，ec==0x00 代表无错误，ec会以引用的方式传递给pController->lookupActuators(ec)， 当错误发生时，ec的值会被sdk修改为相应的错误代码
+    //ec Define an error type, ec==0x00 means no error, ec will be passed to pcontroller-> lookupActuators(ec) by reference,
+    //when the error occurs, ec value will be modified by SDK to the corresponding error code
     Actuator::ErrorsDefine ec;
-    //查找已连接的执行器
+    //Find the connected actuators.
     pController->lookupActuators(ec);
-    //获取所有执行器ID数组
-    vector<uint8_t> actuators = pController->getActuatorIdArray();
-
-    if(actuators.size() > 0)
+    //Gets an array of all actuator IDs
+    vector<uint8_t> idArray = pController->getActuatorIdArray();
+    //If the size of the idArray is greater than zero, the connected actuators have been found
+    if(idArray.size() > 0)
     {
-        if(pController->launchActuator(actuators.at(0)))
+        //Enable an actuator
+        if(pController->enableActuator(idArray.at(0)))
         {
-            cout << "Launch actuator " << (int)actuators.at(0) << " successfully!" << endl;
+            cout << "Enable actuator " << (int)idArray.at(0) << " successfully!" << endl;
         }
-
-        pController->closeActuator(actuators.at(0));
+        //Disable an actuator
+        pController->disableActuator(idArray.at(0));
         //insure that the actuator has been closed
         this_thread::sleep_for(std::chrono::milliseconds(200));
     }
     else
     {
-        //ec=0x803 与ECB(ECU)通信失败
-        //ec=0x802 ECB(ECU)与执行器通信失败
+        //ec=0x803 Communication with ECB(ECU) failed
+        //ec=0x802 Communication with actuator failed
         cout << "Connected error code:" << hex << ec << endl;
     }
 
