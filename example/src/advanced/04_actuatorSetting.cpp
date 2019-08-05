@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
         pController->setProfilePosAcceleration(actuatorID,300);
         //change deceleration to -300 RPM/s
         pController->setProfilePosDeceleration(actuatorID,-300);
-        //change max velocity to 500 RPM/s
+        //change max velocity to 500 RPM
         pController->setProfilePosMaxVelocity(actuatorID,500);
         cout << "change position in low speed " << endl;
         pController->setPosition(actuatorID,-15);
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         pController->setProfilePosAcceleration(actuatorID,1200);
         //change deceleration to -1200 RPM/s
         pController->setProfilePosDeceleration(actuatorID,-1200);
-        //change max velocity to 3000 RPM/s
+        //change max velocity to 3000 RPM
         pController->setProfilePosMaxVelocity(actuatorID,3000);
         cout << "change position in high speed " << endl;
         pController->setPosition(actuatorID,15);
