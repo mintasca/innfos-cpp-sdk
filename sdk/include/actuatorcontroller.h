@@ -195,7 +195,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的比例
      */
-    double getPostionKp(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getPositionKp(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的积分
      * @param id 执行器id
@@ -210,7 +210,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的积分
      */
-    double getPostionKi(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getPositionKi(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的微分
      * @param id 执行器id
@@ -225,7 +225,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的微分
      */
-    double getPostionKd(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getPositionKd(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的最大输出限幅
      * @param id 执行器id
@@ -240,7 +240,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的最大输出限幅
      */
-    double getPostionUmax(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getPositionUmax(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的最小输出限幅
      * @param id 执行器id
@@ -255,7 +255,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的最小输出限幅
      */
-    double getPostionUmin(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getPositionUmin(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的限位偏移
      * @param id 执行器id
@@ -270,7 +270,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的限位偏移
      */
-    double getPostionOffset(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getPositionOffset(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的最大限位
      * @param id 执行器id
@@ -285,7 +285,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的最大限位
      */
-    double getMaximumPostion(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getMaximumPosition(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置位置环的最小限位
      * @param id 执行器id
@@ -300,7 +300,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return 位置环的最小限位
      */
-    double getMinimumPostion(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getMinimumPosition(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 使能/失能执行器限位功能，失能后速度模式和电流模式将不受限位影响
      * @param id 执行器id
@@ -315,7 +315,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return
      */
-    bool isPostionLimitEnable(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    bool isPositionLimitEnable(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置执行器的零位
      * @param id 执行器id
@@ -366,7 +366,7 @@ public:
      * @param acceleration Profile position模式的加速度
      * @param ipAddress 目标ip地址字符串
      */
-    void setProfilePosAcceleration(uint8_t id, double acceleration, const string & ipAddress="");
+    void setProfilePositionAcceleration(uint8_t id, double acceleration, const string & ipAddress="");
     /**
      * @brief 获取Profile position模式的加速度
      * @param id 执行器id
@@ -374,14 +374,14 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return Profile position模式的加速度
      */
-    double getProfilePosAcceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getProfilePositionAcceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置Profile position模式的减速度
      * @param id 执行器id
      * @param deceleration Profile position模式的减速度
      * @param ipAddress 目标ip地址字符串
      */
-    void setProfilePosDeceleration(uint8_t id, double deceleration, const string & ipAddress="");
+    void setProfilePositionDeceleration(uint8_t id, double deceleration, const string & ipAddress="");
     /**
      * @brief 获取Profile position模式的减速度
      * @param id 执行器id
@@ -389,14 +389,14 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return Profile position模式的减速度
      */
-    double getProfilePosDeceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getProfilePositionDeceleration(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     /**
      * @brief 设置Profile position模式的最大速度
      * @param id 执行器id
      * @param maxVelocity Profile position模式的最大速度
      * @param ipAddress 目标ip地址字符串
      */
-    void setProfilePosMaxVelocity(uint8_t id, double maxVelocity, const string & ipAddress="");
+    void setProfilePositionMaxVelocity(uint8_t id, double maxVelocity, const string & ipAddress="");
     /**
      * @brief 获取Profile position模式的最大速度
      * @param id 执行器id
@@ -404,7 +404,7 @@ public:
      * @param ipAddress 目标ip地址字符串
      * @return Profile position模式的最大速度
      */
-    double getProfilePosMaxVelocity(uint8_t id,bool bRefresh,const string & ipAddress="")const;
+    double getProfilePositionMaxVelocity(uint8_t id,bool bRefresh,const string & ipAddress="")const;
     //velocity loop
     /**
  * @brief 设置速度
@@ -865,7 +865,7 @@ public:
  * @param attrId 执行器属性Id
  * @param ipAddress 目标ip地址字符串
 **/
-    void regainAttrbute(uint8_t id,uint8_t attrId,const string & ipAddress="");
+    void regainAttribute(uint8_t id,uint8_t attrId,const string & ipAddress="");
 
     /**
  * @brief 获取执行器错误历史记录
@@ -972,7 +972,7 @@ private:
     void clearError(uint64_t longId);
     void reconnect(uint64_t longId);
     vector<uint16_t> getErrorHistory(uint64_t longId);
-    void regainAttrbute(uint64_t longId,uint8_t attrId);
+    void regainAttribute(uint64_t longId,uint8_t attrId);
     void switchChartAllChannel(uint64_t longId,bool bOn);
     void closeChartChannel(uint64_t longId, uint8_t nChannelId);
     void openChartChannel(uint64_t longId,uint8_t  nChannelId);

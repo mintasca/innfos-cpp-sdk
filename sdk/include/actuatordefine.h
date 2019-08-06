@@ -1,6 +1,9 @@
 ﻿#ifndef ACTUATORDEFINE_H
 #define ACTUATORDEFINE_H
 
+/**
+ * @brief Actuator命名空间定义了所有执行器相关参数
+ */
 namespace Actuator {
 
 ///连接状态，用于执行器和CAN的连接状态判断：
@@ -169,170 +172,170 @@ namespace Actuator {
     enum ActuatorAttribute
     {
         ///电流IQ值
-        CUR_IQ_SETTING,
+        CUR_IQ_SETTING=0x01,
         ///电流比例
-        CUR_PROPORTIONAL,
+        CUR_PROPORTIONAL=0x02,
         ///电流积分
-        CUR_INTEGRAL,
+        CUR_INTEGRAL=0x03,
         ///电流ID值
-        CUR_ID_SETTING,
+        CUR_ID_SETTING=0x04,
         ///预留
-        CUR_MINIMUM,
+        CUR_MINIMUM=0x05,
         ///预留
-        CUR_MAXIMUM,
+        CUR_MAXIMUM=0x06,
         ///预留
-        CUR_NOMINAL,
+        CUR_NOMINAL=0x07,
         ///预留
-        CUR_OUTPUT,
+        CUR_OUTPUT=0x08,
         ///电流环最大速度
-        CUR_MAXSPEED,
+        CUR_MAXSPEED=0x09,
         ///当前电流值
-        ACTUAL_CURRENT,
+        ACTUAL_CURRENT=0x0a,
         ///速度设置
-        VEL_SETTING,
+        VEL_SETTING=0x0b,
         ///速度比例
-        VEL_PROPORTIONAL,
+        VEL_PROPORTIONAL=0x0c,
         ///速度积分
-        VEL_INTEGRAL,
+        VEL_INTEGRAL=0x0d,
         ///速度环输出最小电流比例
-        VEL_OUTPUT_LIMITATION_MINIMUM,
+        VEL_OUTPUT_LIMITATION_MINIMUM=0x0e,
         ///速度环输出最大电流比例
-        VEL_OUTPUT_LIMITATION_MAXIMUM,
+        VEL_OUTPUT_LIMITATION_MAXIMUM=0x0f,
         ///速度值
-        ACTUAL_VELOCITY,
+        ACTUAL_VELOCITY=0x10,
         ///位置设置
-        POS_SETTING,
+        POS_SETTING=0x11,
         ///位置比例
-        POS_PROPORTIONAL,
+        POS_PROPORTIONAL=0x12,
         ///位置积分
-        POS_INTEGRAL,
+        POS_INTEGRAL=0x13,
         ///位置微分
-        POS_DIFFERENTIAL,
+        POS_DIFFERENTIAL=0x14,
         ///位置环输出最小速度比例
-        POS_OUTPUT_LIMITATION_MINIMUM,
+        POS_OUTPUT_LIMITATION_MINIMUM=0x15,
         ///位置环输出最大速度比例
-        POS_OUTPUT_LIMITATION_MAXIMUM,
+        POS_OUTPUT_LIMITATION_MAXIMUM=0x16,
         ///最小位置限制
-        POS_LIMITATION_MINIMUM,
+        POS_LIMITATION_MINIMUM=0x17,
         ///最大位置限制
-        POS_LIMITATION_MAXIMUM,
+        POS_LIMITATION_MAXIMUM=0x18,
         ///归零位置
-        HOMING_POSITION,
+        HOMING_POSITION=0x19,
         ///当前位置
-        ACTUAL_POSITION,
+        ACTUAL_POSITION=0x1a,
         ///profile position模式最大速度
-        PROFILE_POS_MAX_SPEED,
+        PROFILE_POS_MAX_SPEED=0x1b,
         ///profile position模式加速度
-        PROFILE_POS_ACC,
+        PROFILE_POS_ACC=0x1c,
         ///profile position模式减速速度
-        PROFILE_POS_DEC,
+        PROFILE_POS_DEC=0x1d,
         ///profile velocity模式最大速度
-        PROFILE_VEL_MAX_SPEED,
+        PROFILE_VEL_MAX_SPEED=0x1e,
         ///profile velocity模式加速度
-        PROFILE_VEL_ACC,
+        PROFILE_VEL_ACC=0x1f,
         ///profile velocity模式减速速度
-        PROFILE_VEL_DEC,
+        PROFILE_VEL_DEC=0x20,
         ///图像频率
-        CHART_FREQUENCY,
+        CHART_FREQUENCY=0x21,
         ///图像阈值
-        CHART_THRESHOLD,
+        CHART_THRESHOLD=0x22,
         ///图像开关
-        CHART_SWITCH,
+        CHART_SWITCH=0x23,
         ///位置偏移
-        POS_OFFSET,
+        POS_OFFSET=0x24,
         ///电压
-        VOLTAGE,
+        VOLTAGE=0x25,
         ///开启或关闭位置限制
-        POS_LIMITATION_SWITCH,
+        POS_LIMITATION_SWITCH=0x26,
         ///归零最大电流
-        HOMING_CUR_MAXIMUM,
+        HOMING_CUR_MAXIMUM=0x27,
         ///归零最小小电流
-        HOMING_CUR_MINIMUM,
+        HOMING_CUR_MINIMUM=0x28,
         ///物理最大电流值
-        CURRENT_SCALE,
+        CURRENT_SCALE=0x29,
         ///速度最大电流值
-        VELOCITY_SCALE,
+        VELOCITY_SCALE=0x2a,
         ///电流环滤波是否开启
-        FILTER_C_STATUS,
+        FILTER_C_STATUS=0x2b,
         ///电流环滤波值
-        FILTER_C_VALUE,
+        FILTER_C_VALUE=0x2c,
         ///速度环滤波是否开启
-        FILTER_V_STATUS,
+        FILTER_V_STATUS=0x2d,
         ///速度环滤波值
-        FILTER_V_VALUE,
+        FILTER_V_VALUE=0x2e,
         ///位置环滤波是否开启
-        FILTER_P_STATUS,
+        FILTER_P_STATUS=0x2f,
         ///位置环滤波值
-        FILTER_P_VALUE,
+        FILTER_P_VALUE=0x30,
         ///惯量
-        INERTIA,
+        INERTIA=0x31,
         ///堵转保护能量
-        LOCK_ENERGY,
+        LOCK_ENERGY=0x32,
         ///执行器温度
-        ACTUATOR_TEMPERATURE,
+        ACTUATOR_TEMPERATURE=0x33,
         ///逆变器温度
-        INVERTER_TEMPERATURE,
+        INVERTER_TEMPERATURE=0x34,
         ///执行器保护温度
-        ACTUATOR_PROTECT_TEMPERATURE,
+        ACTUATOR_PROTECT_TEMPERATURE=0x35,
         ///执行器恢复温度
-        ACTUATOR_RECOVERY_TEMPERATURE,
+        ACTUATOR_RECOVERY_TEMPERATURE=0x36,
         ///逆变器保护温度
-        INVERTER_PROTECT_TEMPERATURE,
+        INVERTER_PROTECT_TEMPERATURE=0x37,
         ///逆变器恢复温度
-        INVERTER_RECOVERY_TEMPERATURE,
+        INVERTER_RECOVERY_TEMPERATURE=0x38,
         ///预留
-        CALIBRATION_SWITCH,
+        CALIBRATION_SWITCH=0x39,
         ///预留
-        CALIBRATION_ANGLE,
+        CALIBRATION_ANGLE=0x3a,
         ///执行器开关机
-        ACTUATOR_SWITCH,
+        ACTUATOR_SWITCH=0x3b,
         ///执行器固件版本
-        FIRMWARE_VERSION,
+        FIRMWARE_VERSION=0x3c,
         ///执行器是否在线
-        ONLINE_STATUS,
+        ONLINE_STATUS=0x3d,
         ///执行器Id
-        DEVICE_ID,
+        DEVICE_ID=0x3e,
         ///执行器SN号
-        SN_ID,
+        SN_ID=0x3f,
         ///执行器当前模式
-        MODE_ID,
+        MODE_ID=0x40,
         ///错误代码
-        ERROR_ID,
+        ERROR_ID=0x41,
         ///累计运行时间
-        CUMULATIVE_TIME,
+        CUMULATIVE_TIME=0x42,
         ///电流限制，任何情况下执行器电流的绝对值都不会超过此值
-        CURRENT_LIMIT,
+        CURRENT_LIMIT=0x43,
         ///速度限制，任何情况下执行器速度的绝对值都不会超过此值
-        VELOCITY_LIMIT,
+        VELOCITY_LIMIT=0x44,
         ///抱闸
-        ACTUATOR_BRAKE,
+        ACTUATOR_BRAKE=0x45,
         ///连接执行器的中间板id
-        COMMUNICATION_ID,
+        COMMUNICATION_ID=0x46,
         ///初始化状态
-        INIT_STATE,
+        INIT_STATE=0x47,
         ///装载器版本,不可重复读取
-        LOADER_VERSION,
-        VERSION_430,
-        FRENQUENCY_430,
+        LOADER_VERSION=0x48,
+        VERSION_430=0x49,
+        FRENQUENCY_430=0x4a,
         ///预留
-        RESERVE_0,
+        RESERVE_0=0x4b,
         ///预留
-        RESERVE_1,
+        RESERVE_1=0x4c,
         ///预留
-        RESERVE_2,
+        RESERVE_2=0x4d,
         ///预留
-        RESERVE_3,
+        RESERVE_3=0x4e,
         ///预留
-        RESERVE_4,
+        RESERVE_4=0x4f,
         ///预留
-        RESERVE_5,
+        RESERVE_5=0x50,
         ///预留
-        RESERVE_6,
+        RESERVE_6=0x51,
         ///预留
-        RESERVE_7,
+        RESERVE_7=0x52,
         ///预留
-        RESERVE_8,
-        DATA_CNT,
+        RESERVE_8=0x53,
+        DATA_CNT=0x54,
         DATA_CHART,///预留
         DATA_INVALID,
     };
