@@ -78,9 +78,9 @@ namespace Actuator {
     enum OnlineStatus
     {
         ///在线
-        Status_Online=0x00,
+        Status_Online=0x01,
         ///不在线
-        Status_Offline=0x01,
+        Status_Offline=0x00,
     };
 
 ///开关状态，标识执行器的开关机状态：
