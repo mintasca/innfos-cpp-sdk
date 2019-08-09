@@ -16,5 +16,5 @@
 
 更多配置以及编译等事项请参考</br>
 </html>
-http://wiki.innfos.com:81/wiki/index.php/Ethernet_Communication_SDK
+https://innfos.github.io/wiki/cn/index.html#!pages/Ethernet_Communication_SDK.md
 </html>
