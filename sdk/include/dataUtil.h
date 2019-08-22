@@ -12,6 +12,7 @@ public:
     static Actuator::Directives convertToReadProxyId(Actuator::ActuatorAttribute id);
     static Actuator::Directives convertToSetProxyId(Actuator::ActuatorAttribute id);
     static Actuator::ActuatorAttribute convertToMotorDataId(Actuator::Directives id);
+    ~DataUtil();
 private:
 private:
     class GC{
