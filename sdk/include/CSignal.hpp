@@ -5,6 +5,10 @@
 #include <map>
 #include <vector>
 
+/**
+ * @brief The CSignal class 信号类，用于异步触发回调，一个信号可以触发多个回调
+ */
+
 template <typename... Args>
 class CSignal
 {

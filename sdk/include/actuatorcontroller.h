@@ -103,9 +103,9 @@ public:
     bool enableAllActuators();
     /**
  * @brief 失能所有执行器
- * @date 2018/01/15
+ * @return 全部失能成功返回true，否则返回false
 **/
-    void disableAllActuators();
+    bool disableAllActuators();
 /**
  * @brief 使能指定执行器
  * @param id 执行器id
@@ -116,15 +116,16 @@ public:
     /**
      * @brief 使能指定执行器
      * @param unifiedIDArray 执行器UnifiedID数组
-     * @warning 执行器使能成功返回true,否则返回false
+     * @return 执行器使能成功返回true,否则返回false
     **/
     bool enableActuatorInBatch(const vector<UnifiedID>& unifiedIDArray);
     /**
  * @brief 失能指定执行器
  * @param id 执行器id
  * @param ipAddress 目标ip地址字符串
+ * @return 执行器失能成功返回true,否则返回false
 **/
-    void disableActuator(uint8_t id,const string & ipAddress="");
+    bool disableActuator(uint8_t id,const string & ipAddress="");
 
     /**
      * @brief activateActuatorMode 激活单个执行器的指定模式
@@ -961,7 +962,9 @@ public:
     void receiveLossRatio(uint64_t nIMUId,uint32_t receive,uint32_t lost);
 #endif
     void setActuatorAttribute(uint64_t longId,Actuator::ActuatorAttribute attrId,double value);
+    void setActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,double value,const string & ipAddress="");
     double getActuatorAttribute(uint64_t longId,Actuator::ActuatorAttribute attrId)const;
+    double getActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,const string & ipAddress="")const;
 private:
     //v3.0 add end
     void switchCalibrationVel(uint64_t longId,uint8_t nValue);
@@ -982,9 +985,6 @@ private:
     void setHomingOperationMode(uint64_t longId,uint8_t nMode);
     void clearHomingInfo(uint64_t longId);
     bool saveAllParams(uint64_t id);
-    void setActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,double value,const string & ipAddress="");
-
-    double getActuatorAttribute(uint8_t id,Actuator::ActuatorAttribute attrId,const string & ipAddress="")const;
 
     double getCurrent(uint64_t longId,bool bRefresh=false)const;
     double getVelocity(uint64_t longId,bool bRefresh=false)const;
