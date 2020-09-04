@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.0)
 project(example)
 
 SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include)
@@ -14,6 +14,7 @@ SET(EXAMPLE_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/04_actuatorSetting.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/05a_feedback_sync.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/05b_feedback_asyc.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/advanced/06a_auto_homing.cpp
 )
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
