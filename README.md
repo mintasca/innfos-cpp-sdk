@@ -16,5 +16,5 @@
 
 更多配置以及编译等事项请参考</br>
 </html>
-https://innfos.github.io/wiki/cn/index.html#!pages/Ethernet_Communication_SDK_C++.md
+http://wiki.mintasca.cloudminds.com/wiki/cn/index.html#!pages/Ethernet_Communication_SDK_C++.md
 </html>
